@@ -1,0 +1,44 @@
+﻿<html>
+<head>
+    <title>DemoApp</title>
+    <link rel="icon" href="https://www.f5.com/content/dam/f5/f5-logo.svg">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+
+    <div class="banner-container">
+        <img src="https://www.f5.com/content/dam/f5/f5-logo.svg" class="img-logo">
+        <img src="https://www.f5.com/content/dam/f5-com/global-assets/f5-logos/distributed-cloud-services.svg" class="img-logo-text">
+    </div>
+
+    <div class="menu-container">
+        <ul class="menu">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/response">Response</a></li>
+            <li><a href="/attack">Attack</a></li>
+            <li><a href="/login">Login</a></li>
+            <!--<li><a href="/cat">API</a></li>-->
+        </ul>
+    </div>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="post" action="/login">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <input type="submit" value="Login">
+        </form>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <p class="error-message">@ViewBag.ErrorMessage</p>
+        }
+    </div>
+
+    <div class="disclaimer">
+        Site is for demonstration only. Not an official F5 property.
+    </div>
+
+</body>
+</html>
