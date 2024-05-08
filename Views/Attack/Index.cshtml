@@ -24,14 +24,14 @@
     <div class="button-container">
         <button class="button" onclick="loadPage('/Attack/SQL?age=5%27%20OR%20%271%27=%271')">SQL</button>
         <button class="button" onclick="loadPage('/Attack/DIR?file=../../hidden_agenda.txt')">DIR</button>
-        <!--<button class="button" onclick="loadPage('/Attack/XSS?post=%3Cscript%3Ealert(%22attack%22)%3B%3C/script%3E')">XSS</button>-->
+        <button class="button" onclick="loadPage('/Attack/XSS?update=%3Cscript%3Ealert%28%27XSS%27%29%3B%3C%2Fscript%3E')">XSS</button>
     </div>
 
     <div class="request-info-container">
     </div>
 
     <div class="frame-container">
-        <iframe class="frame" id="pageFrame" src="" frameborder="0">
+        <iframe class="frame" id="pageFrame">
         </iframe>
     </div>
 
@@ -42,15 +42,22 @@
                 document.getElementById('pageFrame').src = url;
 
                 // Decode the URL to remove encoding
-                var decodedUrl = decodeURIComponent(url);
+                var decodedUrl = decodeURIComponent(url)
 
-                // Get the request information
-                var requestInfo = "Request URI: " + decodedUrl; // You can add more details if needed
+                // Get the container element
+                var requestContainer = document.querySelector('.request-info-container');
 
-                // Display the request information
-                document.querySelector('.request-info-container').innerHTML = requestInfo;
+                // Clear any existing content in the container
+                requestContainer.innerHTML = '';
+
+                // Create a text node containing the request information
+                var requestText = document.createTextNode("Request URI: " + decodedUrl); // You can add more details if needed
+
+                // Append the text node to the container
+                requestContainer.appendChild(requestText);
             }
         </script>
+
     </div>
 
     <div class="disclaimer">

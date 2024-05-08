@@ -35,7 +35,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
     .menu {
@@ -64,19 +64,56 @@
             color: #fff;
         }
 
+.button-home-grid {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    grid-template-rows: 200px 200px;
+    gap: 10px; /* Add a 10px gap between the buttons */
+    justify-content: center;
+    align-items: center;
+}
+
+.button-home {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+    .button-home img {
+        max-width: 80%;
+        max-height: 80%;
+    }
+
+    .button-home:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
 .h3-title {
-    color: #003366;
+    color: #000000;
     font-size: 24px;
     margin: 0;
-    padding: 10px 0;
+    padding: 5px 0;
     text-align: center;
 }
 
 .h2-title {
-    color: #003366;
+    color: #000000;
     font-size: 20px;
     margin: 0;
-    padding: 10px 0;
+    padding: 5px 0;
     text-align: center;
 }
 
@@ -133,12 +170,15 @@
         }
 
         .login-container form input[type="submit"] {
-            background-color: #0059b3;
+            background-color: #333;
             color: #fff;
+            border: 0px;
+            border-radius: 4px;
             cursor: pointer;
         }
 
             .login-container form input[type="submit"]:hover {
+                background-color: #333;
                 background-color: #003366;
             }
 
@@ -181,7 +221,7 @@ table {
 
 .button-container {
     display: flex;
-    margin: 20px auto;
+    margin: 10px auto;
     justify-content: center;
 }
 
@@ -189,19 +229,23 @@ table {
         display: inline-block;
         padding: 10px 20px;
         margin: 10px;
-        background-color: #003366;
+        background-color: #333;
         color: #fff;
         border: none;
         border-radius: 5px;
         cursor: pointer;
     }
 
+    .button:hover {
+        background-color: #003366;
+    }
+
 .request-info-container {
     width: 500px;
-    height: 50px;
+    height: 20px;
     margin: 0 auto;
     padding: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
     border: 1px solid #ccc;
     background-color: white;
     display: flex;
@@ -226,18 +270,18 @@ table {
     width: 500px;
     margin: 0 auto;
     padding: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
     border: 1px solid #ccc;
     background-color: white;
-    display: flex;
+
     justify-content: center;
     align-items: center;
 }
 
 .frame {
     width: 100%;
-    height: 350px;
-    border: none;
+    height: 375px;
+    border: 0px;
 }
 
 .table-frame-container {
@@ -300,8 +344,9 @@ table {
 .response-container {
     width: 250px;
     height: 250px;
-    margin: 20px auto;
+    margin: auto;
     border-radius: 4px;
     padding: 20px;
     text-align: center;
+    vertical-align: middle;
 }
