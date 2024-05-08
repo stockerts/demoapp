@@ -25,6 +25,7 @@
         <button class="button" onclick="loadPage('/Attack/SQL?age=5%27%20OR%20%271%27=%271')">SQL</button>
         <button class="button" onclick="loadPage('/Attack/DIR?file=../../hidden_agenda.txt')">DIR</button>
         <button class="button" onclick="loadPage('/Attack/XSS?update=%3Cscript%3Ealert%28%27XSS%27%29%3B%3C%2Fscript%3E')">XSS</button>
+        <button class="button" onclick="postCredentials()">Login</button>
     </div>
 
     <div class="request-info-container">
@@ -55,6 +56,36 @@
 
                 // Append the text node to the container
                 requestContainer.appendChild(requestText);
+            }
+            function postCredentials() {
+                // Clear request-info-container
+                var requestContainer = document.querySelector('.request-info-container');
+                requestContainer.innerHTML = '';
+
+                const url = '/login'; // Replace with your actual endpoint
+                const username = 'admin';
+                const password = 'admin';
+
+                const formData = new FormData();
+                formData.append('username', username);
+                formData.append('password', password);
+
+                fetch(url, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => {
+                        if (response.status === 200 || response.status === 302) {
+                            // If status is 200 or 302, load the BOT page within the iframe
+                            document.getElementById('pageFrame').src = '/Attack/Bot_Pass';
+                        } else if (!response.ok) {
+                            document.getElementById('pageFrame').src = '/Attack/Bot_Fail';
+                        }
+                    })
+                    .catch(error => {
+                        // Handle error
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
             }
         </script>
 
