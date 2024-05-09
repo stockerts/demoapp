@@ -9,7 +9,6 @@ var app = builder.Build();
 app.UseExceptionHandler("/Home/Error");
 app.UseStatusCodePagesWithReExecute("/Home/NotFound");
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
