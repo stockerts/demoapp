@@ -15,6 +15,9 @@ namespace Client.Controllers
             // Get the X-Forwarded-For header (if any)
             var xForwardedFor = HttpContext.Request.Headers["X-Forwarded-For"].ToString();
 
+            // Get the Host header (if any)
+            var host = HttpContext.Request.Headers["Host"].ToString();
+
             // Get the User-Agent header
             var userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
 
@@ -26,6 +29,7 @@ namespace Client.Controllers
             {
                 IpAddress = string.IsNullOrEmpty(ipAddress) ? "Unable to determine IP address." : ipAddress,
                 XForwardedFor = string.IsNullOrEmpty(xForwardedFor) ? "No X-Forwarded-For header present." : xForwardedFor,
+                Host = string.IsNullOrEmpty(host) ? "No Host header present." : host,
                 UserAgent = userAgent,
                 Server = string.IsNullOrEmpty(server) ? "No Server header present." : server
             };
