@@ -27,7 +27,7 @@ namespace Client.Controllers
                 IpAddress = string.IsNullOrEmpty(ipAddress) ? "Unable to determine IP address." : ipAddress,
                 XForwardedFor = string.IsNullOrEmpty(xForwardedFor) ? "No X-Forwarded-For header present." : xForwardedFor,
                 UserAgent = userAgent,
-                ServerHeader = string.IsNullOrEmpty(server) ? "No Server header present." : server
+                Server = string.IsNullOrEmpty(server) ? "No Server header present." : server
             };
 
             return Ok(response);
