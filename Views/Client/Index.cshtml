@@ -25,11 +25,28 @@
 
     <div class="clientinfo-container">
         <h1>Client Information</h1>
-        <p><strong>IP Address:</strong> @Model.IpAddress</p>
-        <p><strong>X-Forwarded-For:</strong> @Model.XForwardedFor</p>
-        <p><strong>Host:</strong> @Model.Host</p>
-        <p><strong>User-Agent:</strong> @Model.UserAgent</p>
-        <p><strong>Server:</strong> @Model.Server</p>
+        <table class="clientinfo-table">
+            <tr>
+                <th>IP Address:</th>
+                <td>@Model.IpAddress</td>
+            </tr>
+            <tr>
+                <th>X-Forwarded-For:</th>
+                <td>@Model.XForwardedFor</td>
+            </tr>
+            <tr>
+                <th>Host:</th>
+                <td>@Model.Host</td>
+            </tr>
+            <tr>
+                <th>User-Agent:</th>
+                <td>@Model.UserAgent</td>
+            </tr>
+            <tr>
+                <th>Server Header:</th>
+                <td>@Model.Server</td>
+            </tr>
+        </table>
     </div>
 
     <div class="disclaimer">
