@@ -2,12 +2,9 @@
 
 namespace Client.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ClientController : ControllerBase
+    public class ClientController : Controller
     {
-        [HttpGet]
-        public IActionResult GetClientIp()
+        public IActionResult Index()
         {
             // Get the client's IP address
             var ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
@@ -25,7 +22,7 @@ namespace Client.Controllers
             var server = HttpContext.Request.Headers["Server"].ToString();
 
             // Prepare the response object
-            var response = new
+            var model = new ClientInfoViewModel
             {
                 IpAddress = string.IsNullOrEmpty(ipAddress) ? "Unable to determine IP address." : ipAddress,
                 XForwardedFor = string.IsNullOrEmpty(xForwardedFor) ? "No X-Forwarded-For header present." : xForwardedFor,
@@ -34,7 +31,16 @@ namespace Client.Controllers
                 Server = string.IsNullOrEmpty(server) ? "No Server header present." : server
             };
 
-            return Ok(response);
+            return View(model);
         }
+    }
+
+    public class ClientInfoViewModel
+    {
+        public string IpAddress { get; set; }
+        public string XForwardedFor { get; set; }
+        public string Host { get; set; }
+        public string UserAgent { get; set; }
+        public string Server { get; set; }
     }
 }
