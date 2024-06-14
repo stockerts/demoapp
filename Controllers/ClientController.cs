@@ -21,6 +21,9 @@ namespace Client.Controllers
             // Get the Server header (if any)
             var server = HttpContext.Request.Headers["Server"].ToString();
 
+            // Get the Server header (if any)
+            var xcCustom = HttpContext.Request.Headers["XC-Custom"].ToString();
+
             // Prepare the response object
             var model = new ClientInfoViewModel
             {
@@ -28,7 +31,8 @@ namespace Client.Controllers
                 XForwardedFor = string.IsNullOrEmpty(xForwardedFor) ? "No X-Forwarded-For header present." : xForwardedFor,
                 Host = string.IsNullOrEmpty(host) ? "No Host header present." : host,
                 UserAgent = userAgent,
-                Server = string.IsNullOrEmpty(server) ? "No Server header present." : server
+                Server = string.IsNullOrEmpty(server) ? "No Server header present." : server,
+                XCCustom = string.IsNullOrEmpty(xcCustom) ? "No XC-Custom header present." : xcCustom
             };
 
             return View(model);
@@ -42,5 +46,6 @@ namespace Client.Controllers
         public string Host { get; set; }
         public string UserAgent { get; set; }
         public string Server { get; set; }
+        public string XCCustom { get; set; }
     }
 }
