@@ -18,10 +18,13 @@ namespace Client.Controllers
             // Get the User-Agent header
             var userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
 
+            // Get the Content-Security-Policy header (if any)
+            var CSP = HttpContext.Request.Headers["Content-Security-Policy"].ToString();
+
             // Get the Server header (if any)
             var server = HttpContext.Request.Headers["Server"].ToString();
 
-            // Get the Server header (if any)
+            // Get the XC-Custom header (if any)
             var xcCustom = HttpContext.Request.Headers["XC-Custom"].ToString();
 
             // Prepare the response object
@@ -31,8 +34,10 @@ namespace Client.Controllers
                 XForwardedFor = string.IsNullOrEmpty(xForwardedFor) ? "No X-Forwarded-For header present." : xForwardedFor,
                 Host = string.IsNullOrEmpty(host) ? "No Host header present." : host,
                 UserAgent = userAgent,
+                CSP = string.IsNullOrEmpty(CSP) ? "No Content-Security-Policy header present." : CSP,
                 Server = string.IsNullOrEmpty(server) ? "No Server header present." : server,
                 XCCustom = string.IsNullOrEmpty(xcCustom) ? "No XC-Custom header present." : xcCustom
+
             };
 
             return View(model);
@@ -45,6 +50,7 @@ namespace Client.Controllers
         public string XForwardedFor { get; set; }
         public string Host { get; set; }
         public string UserAgent { get; set; }
+        public string CSP { get; set; }
         public string Server { get; set; }
         public string XCCustom { get; set; }
     }
