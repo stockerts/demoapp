@@ -230,32 +230,38 @@
         color: #fff;
     }
 
-table {
+.clientheader-container {
+    background-color: #ffffff;
+    border-radius: 5px;
+    width: 900px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    overflow: hidden;
+    padding: 20px;
+}
+
+    .clientheader-container h1 {
+        text-align: center;
+        margin-top: 0;
+    }
+
+.clientheader-table {
     width: 100%;
-    border: 1px solid #ddd;
-    max-width: 900px;
-    margin: 0 auto;
     border-collapse: collapse;
 }
 
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
+    .clientheader-table th,
+    .clientheader-table td {
+        padding: 10px;
+        border: 1px solid rgba(0, 0, 0, 0);
         text-align: left;
     }
 
-    th {
-        background-color: #003366;
-        color: white;
-    }
-
-    tr:hover {
-        background-color: #c4def6;
-    }
-
-    .error-message {
-        color: #ff0000;
-        margin-top: 5px;
+    .clientheader-table th {
+        background-color: #ffffff;
+        color: black;
+        width: 30%; /* Changed to 40% */
+        vertical-align: top;
     }
 
 .button-container {

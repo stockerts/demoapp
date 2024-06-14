@@ -1,4 +1,4 @@
-﻿@model Client.Controllers.ClientInfoViewModel
+﻿@model Client.Controllers.HeaderInfoViewModel
 <html>
 <head>
     <title>DemoApp</title>
@@ -22,32 +22,17 @@
         </ul>
     </div>
 
-    <div class="clientinfo-container">
-        <h1>Client Information</h1>
-        <table class="clientinfo-table">
-            <tr>
-                <th>IP Address:</th>
-                <td>@Model.IpAddress</td>
-            </tr>
-            <tr>
-                <th>X-Forwarded-For:</th>
-                <td>@Model.XForwardedFor</td>
-            </tr>
-            <tr>
-                <th>Host:</th>
-                <td>@Model.Host</td>
-            </tr>
-            <tr>
-                <th>User-Agent:</th>
-                <td>@Model.UserAgent</td>
-            </tr>
+    <div class="clientheader-container">
+        <h1>Header Information</h1>
+        <table class="clientheader-table">
+                @foreach (var header in Model.Headers)
+                {
+                    <tr>
+                        <th class="header-key">@header.Key</th>
+                        <td class="header-value">@header.Value</td>
+                    </tr>
+                }
         </table>
-    </div>
-
-    <div class="menu-container">
-        <ul class="menu">
-            <li><a href="/client/header">Header Detail</a></li>
-        </ul>
     </div>
 
     <div class="disclaimer">
