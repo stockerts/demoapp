@@ -213,9 +213,11 @@
 
     .clientinfo-table th,
     .clientinfo-table td {
-        padding:10px;
+        padding: 10px;
         border: 1px solid rgba(0, 0, 0, 0);
         text-align: left;
+        word-break: break-all;
+        overflow-wrap: break-word;
     }
 
     .clientinfo-table th {
@@ -223,11 +225,6 @@
         color: black;
         width: 20%;
         vertical-align: top;
-    }
-
-    .clientinfo-table tr:hover {
-        background-color: #003366; 
-        color: #fff;
     }
 
 .clientheader-container {
