@@ -1,12 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure services
-builder.Services.AddHttpClient<CatService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-app.UseExceptionHandler("/Home/Error");
 app.UseStatusCodePagesWithReExecute("/Home/NotFound");
 
 app.UseStaticFiles();
