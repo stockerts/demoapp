@@ -10,6 +10,6 @@ public class HomeController : Controller
     // Action method to handle the 404 error
     public IActionResult NotFound()
     {
-        return View("NotFound"); // Assuming you have a view named "NotFound.cshtml" in the Views/Shared directory
+        return View("NotFound");
     }
 }
