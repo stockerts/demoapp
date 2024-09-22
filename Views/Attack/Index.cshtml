@@ -40,21 +40,20 @@
                 // Set the src attribute of the iframe
                 document.getElementById('pageFrame').src = url;
 
+                // Decode the URL to remove encoding
+                var decodedUrl = decodeURIComponent(url)
+
                 // Get the container element
                 var requestContainer = document.querySelector('.request-info-container');
 
                 // Clear any existing content in the container
-                if (url === '/attack/bot') {
-                    // If the page is /attack/bot, clear the request-info-container
-                    var requestContainer = document.querySelector('.request-info-container');
-                    requestContainer.innerHTML = "Request Info: direct login POST with credentials";
-                } else {
-                    // Otherwise, display the request URI
-                    var decodedUrl = decodeURIComponent(url);
-                    requestContainer.innerHTML = '';
-                    var requestText = document.createTextNode("Request URI: " + decodedUrl);
-                    requestContainer.appendChild(requestText);
-                }
+                requestContainer.innerHTML = '';
+
+                // Create a text node containing the request information
+                var requestText = document.createTextNode("Request URI: " + decodedUrl); // You can add more details if needed
+
+                // Append the text node to the container
+                requestContainer.appendChild(requestText);
             }
 
             function loginPost() {
@@ -72,14 +71,12 @@
                 
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4) {
-                        // When the request is completed
-                        var responseContainer = document.getElementById('responseContainer'); // Get response container
                         if (xhr.status === 200 && xhr.responseText.includes("Login") && xhr.responseText.includes("Successful")) {
                             // Redirect to /attack/bot upon successful login
                             document.getElementById('pageFrame').src = '/attack/bot';
                         } else {
                             // Display the response in the response-container
-                            document.getElementById('pageFrame').src = 'response'; 
+                            document.getElementById('pageFrame').srcdoc = xhr.responseText;
                         }
                     }
                 };
