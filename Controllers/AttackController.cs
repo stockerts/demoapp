@@ -20,9 +20,4 @@ public class AttackController : Controller
     {
         return View("XSS");
     }
-
-    public IActionResult Bot()
-    {
-        return View("Bot");
-    }
 }
