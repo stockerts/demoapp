@@ -63,18 +63,23 @@
                 xhr.open('POST', url, true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 
+                // Update the request-info-container for login action
+                var requestContainer = document.querySelector('.request-info-container');
+                requestContainer.innerHTML = "Request Info: direct login POST with credentials";
+
                 // The POST body content
                 var body = 'username=admin&password=admin';
                 
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4) {
                         // When the request is completed
-                        if (xhr.status === 200) {
+                        var responseContainer = document.getElementById('responseContainer'); // Get response container
+                        if (xhr.status === 200 && xhr.responseText.includes("Login") && xhr.responseText.includes("Successful")) {
                             // Redirect to /attack/bot upon successful login
-                            loadPage('/attack/bot');
+                            document.getElementById('pageFrame').src = '/attack/bot';
                         } else {
-                            // Handle error
-                            alert('Login failed: ' + xhr.statusText);
+                            // Display the response in the response-container
+                            responseContainer.innerHTML = "Response: " + xhr.responseText;
                         }
                     }
                 };
