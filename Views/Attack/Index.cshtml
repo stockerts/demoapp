@@ -25,7 +25,6 @@
         <button class="button" onclick="loadPage('/Attack/SQL?age=5%27%20OR%20%271%27=%271')">SQL</button>
         <button class="button" onclick="loadPage('/Attack/DIR?file=../../hidden_agenda.txt')">DIR</button>
         <button class="button" onclick="loadPage('/Attack/XSS?update=%3Cscript%3Ealert%28%27XSS%27%29%3B%3C%2Fscript%3E')">XSS</button>
-        <button class="button" onclick="loginPost()">Bot</button>
     </div>
 
     <div class="request-info-container"></div>
@@ -54,35 +53,6 @@
 
                 // Append the text node to the container
                 requestContainer.appendChild(requestText);
-            }
-
-            function loginPost() {
-                var xhr = new XMLHttpRequest();
-                var url = '/login/index';
-                xhr.open('POST', url, true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                
-                // Update the request-info-container for login action
-                var requestContainer = document.querySelector('.request-info-container');
-                requestContainer.innerHTML = "Request Info: direct login POST with credentials";
-
-                // The POST body content
-                var body = 'username=admin&password=admin';
-                
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4) {
-                        if (xhr.status === 200 && xhr.responseText.includes("Login") && xhr.responseText.includes("Successful")) {
-                            // Redirect to /attack/bot upon successful login
-                            document.getElementById('pageFrame').src = '/attack/bot';
-                        } else {
-                            // Display the response in the response-container
-                            document.getElementById('pageFrame').src = url;
-                        }
-                    }
-                };
-                
-                // Send the POST request
-                xhr.send(body);
             }
         </script>
     </div>
