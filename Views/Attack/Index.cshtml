@@ -72,10 +72,10 @@
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200 && xhr.responseText.includes("Login") && xhr.responseText.includes("Successful")) {
-                            // Redirect to /attack/bot upon successful login
+                            // Redirect to bot page upon successful login
                             document.getElementById('pageFrame').src = '/attack/bot';
                         } else {
-                            // Display the response in the response-container
+                            // Redirect to bot_fail page upon failed login
                             document.getElementById('pageFrame').src = '/attack/bot_fail';
                         }
                     }
