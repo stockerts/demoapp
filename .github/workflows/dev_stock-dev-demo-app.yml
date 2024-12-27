@@ -3,7 +3,7 @@ name: stock-dev-demo-app
 on:
   push:
     branches:
-      - 'feature*'
+      - dev
   workflow_dispatch:
 
 jobs:
