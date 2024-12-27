@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 public class LoginController : Controller
 {
     private readonly IConfiguration _configuration;
