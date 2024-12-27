@@ -1,9 +1,9 @@
-name: Build and deploy ASP.Net Core app to Azure Web App - stock-dev-demo-app
+name: stock-dev-demo-app
 
 on:
   push:
     branches:
-      - dev
+      - 'feature*'
   workflow_dispatch:
 
 jobs:
