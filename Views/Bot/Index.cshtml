@@ -1,54 +1,120 @@
-﻿@{
-    ViewData["Title"] = "Bot Page";
-}
+﻿<html>
+<head>
+    <title>DemoApp</title>
+    <link rel="icon" href="/images/f5-logo.svg">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
 
-<h2>Bot Page</h2>
+    <div class="banner-container">
+        <img src="/images/f5-logo.svg" class="img-logo">
+        <img src="/images/demo-app-title.png" class="img-logo-text">
+    </div>
 
-<div>
-    <label for="protocol">Protocol:</label>
-    <input type="text" id="protocol" readonly />
-</div>
-<div>
-    <label for="domain">Domain:</label>
-    <input type="text" id="domain" readonly />
-</div>
-<div>
-    <label for="port">Port:</label>
-    <input type="text" id="port" readonly />
-</div>
+    <div class="menu-container">
+        <ul class="menu">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/client">Client</a></li>
+            <li><a href="/response">Response</a></li>
+            <li><a href="/attack">Attack</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
+    </div>
+    <div class="button-container">
+        <button class="button" id="postButtonSimple">Simple Bot</button>
+        <button class="button" id="postButtonComplex">Complex Bot</button>
+    </div>
+    <div class="request-info-container" id="urlDisplay" style="margin-bottom: 10px;"></div>
 
-<button id="postButton">Send Request</button>
-<iframe id="resultFrame" style="width: 100%; height: 300px; border: 1px solid black;"></iframe>
+    <div class="frame-container">
+        <iframe class="frame" id="resultFrame"></iframe>
+    </div>
 
-<script>
-    // Populate protocol, domain, and port based on the current URL
-    document.addEventListener('DOMContentLoaded', () => {
-        const protocol = window.location.protocol.replace(':', ''); // Remove the trailing colon
-        const domain = window.location.hostname;
-        const port = window.location.port || (protocol === 'https' ? '443' : '80'); // Default ports
+    <script>
+        // Clear the URL display when the page initially loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlDisplay = document.getElementById('urlDisplay');
+            urlDisplay.textContent = ''; // Clear any existing content
 
-        document.getElementById('protocol').value = protocol;
-        document.getElementById('domain').value = domain;
-        document.getElementById('port').value = port;
-    });
+            // Construct and display the URL when a button is pressed
+            const protocol = window.location.protocol.replace(':', ''); // Remove the trailing colon
+            const domain = window.location.hostname;
+            const port = window.location.port || (protocol === 'https' ? '443' : '80'); // Default ports
 
-    document.getElementById('postButton').addEventListener('click', async () => {
-        const protocol = document.getElementById('protocol').value;
-        const domain = document.getElementById('domain').value;
-        const port = document.getElementById('port').value;
+            // Store for use in the POST request
+            urlDisplay.dataset.protocol = protocol;
+            urlDisplay.dataset.domain = domain;
+            urlDisplay.dataset.port = port;
+        });
 
-        try {
-            const response = await fetch('/Bot/PostToLogin', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams({ protocol, domain, port }), // Pass form data
-            });
+        document.getElementById('postButtonSimple').addEventListener('click', async () => {
+            const protocol = document.getElementById('urlDisplay').dataset.protocol;
+            const domain = document.getElementById('urlDisplay').dataset.domain;
+            const port = document.getElementById('urlDisplay').dataset.port;
 
-            const text = await response.text();
-            document.getElementById('resultFrame').srcdoc = text;
-        } catch (error) {
-            document.getElementById('resultFrame').srcdoc = `<p style="color: red;">Error: ${error.message}</p>`;
-        }
-    });
-</script>
+            // Get the name of the button clicked
+            const buttonName = document.getElementById('postButtonSimple').textContent;
 
+            // Update the URL display to include the button name
+            const urlDisplay = document.getElementById('urlDisplay');
+            urlDisplay.textContent = `POST: ${protocol}://${domain}:${port}/login (Button: ${buttonName})`;
+
+            try {
+                const response = await fetch('/Bot/PostToLogin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        protocol,
+                        domain,
+                        port,
+                        userAgent: 'DemoAppBot'  // User-Agent for Simple Bot
+                    }),
+                });
+
+                const text = await response.text();
+                document.getElementById('resultFrame').srcdoc = text;
+            } catch (error) {
+                document.getElementById('resultFrame').srcdoc = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        });
+
+        document.getElementById('postButtonComplex').addEventListener('click', async () => {
+            const protocol = document.getElementById('urlDisplay').dataset.protocol;
+            const domain = document.getElementById('urlDisplay').dataset.domain;
+            const port = document.getElementById('urlDisplay').dataset.port;
+
+            // Get the user agent of the client's browser
+            const browserUserAgent = navigator.userAgent;
+
+            // Get the name of the button clicked
+            const buttonName = document.getElementById('postButtonComplex').textContent;
+
+            // Update the URL display to include the button name
+            const urlDisplay = document.getElementById('urlDisplay');
+            urlDisplay.textContent = `POST: ${protocol}://${domain}:${port}/login (Button: ${buttonName})`;
+
+            try {
+                const response = await fetch('/Bot/PostToLogin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        protocol,
+                        domain,
+                        port,
+                        userAgent: browserUserAgent  // User-Agent for Complex Bot set to client's browser User-Agent
+                    }),
+                });
+
+                const text = await response.text();
+                document.getElementById('resultFrame').srcdoc = text;
+            } catch (error) {
+                document.getElementById('resultFrame').srcdoc = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        });
+    </script>
+
+    <div class="disclaimer">
+        Site is for demonstration only. Not an official F5 property.
+    </div>
+</body>
+</html>

@@ -21,7 +21,7 @@ public class BotController : Controller
 
     // Handle POST requests from the Bot page
     [HttpPost]
-    public async Task<IActionResult> PostToLogin([FromForm] string protocol, [FromForm] string domain, [FromForm] string port)
+    public async Task<IActionResult> PostToLogin([FromForm] string protocol, [FromForm] string domain, [FromForm] string port, [FromForm] string userAgent)
     {
         try
         {
@@ -31,8 +31,17 @@ public class BotController : Controller
             // Prepare the POST request body
             var content = new StringContent("username=admin&password=admin", Encoding.UTF8, "application/x-www-form-urlencoded");
 
+            // Set up the request message
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
+            {
+                Content = content
+            };
+
+            // Add the User-Agent header
+            request.Headers.UserAgent.ParseAdd(userAgent);
+
             // Send the POST request
-            var response = await _httpClient.PostAsync(url, content);
+            var response = await _httpClient.SendAsync(request);
 
             // Retrieve response content
             var responseContent = await response.Content.ReadAsStringAsync();
