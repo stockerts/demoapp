@@ -67,7 +67,7 @@
 .button-home-grid {
     display: grid;
     grid-template-columns: 200px 200px;
-    grid-template-rows: 200px 200px;
+    grid-template-rows: 200px 200px 200px;
     gap: 10px; /* Add a 10px gap between the buttons */
     justify-content: center;
     align-items: center;
