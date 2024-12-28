@@ -35,6 +35,21 @@
         <iframe class="frame" id="pageFrame"></iframe>
     </div>
 
+    <div style="text-align: center; margin-top: 20px;">
+        <button id="infoButton" class="info-button">Info</button>
+    </div>
+
+    <div id="infoFrame" class="info-frame">
+        <div class="info-content">
+            <p>Click one of the buttons to simulate an attack. These patterns of attacks can be identified and migited by a WAF.</p>
+            <p><strong>SQL Injection:</strong> Attacker manipulates a web application's database query by injecting malicious SQL code into input fields, allowing them to retrieve, modify, or delete data from the database.</p>
+            <p><strong>Path Traversal:</strong> This attack occurs when an attacker exploits a vulnerability in an application to access restricted files or directories on the server by manipulating file paths.</p>
+            <p><strong>Cross-Site Scripting:</strong> Attacker injects malicious scripts into web pages viewed by other users, typically executed in the victim's browser to steal cookies, session tokens, or perform other malicious actions..</p>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
     <div class="script-container">
         <script>
             function loadPage(url) {
@@ -86,6 +101,21 @@
                 // Send the POST request
                 xhr.send(body);
             }
+        // Info Button
+        document.getElementById('infoButton').addEventListener('click', () => {
+            document.getElementById('infoFrame').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        });
+
+        const closeModal = () => {
+            document.getElementById('infoFrame').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        };
+
+        // Close modal by clicking anywhere
+        document.getElementById('overlay').addEventListener('click', closeModal);
+        document.getElementById('infoFrame').addEventListener('click', closeModal);
+
         </script>
     </div>
 

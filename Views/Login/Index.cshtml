@@ -37,6 +37,36 @@
         }
     </div>
 
+    <div style="text-align: center; margin-top: 20px;">
+        <button id="infoButton" class="info-button">Info</button>
+    </div>
+
+    <div id="infoFrame" class="info-frame">
+        <div class="info-content">
+            <p>Login page to provide a target for form-based attacks. A session cookie will be created "demoapp_session" on successfull login. </p>
+            <p><strong>Username:</strong> admin</p>
+            <p><strong>Password:</strong> admin</p>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+    <script>
+        // Info Button
+        document.getElementById('infoButton').addEventListener('click', () => {
+            document.getElementById('infoFrame').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        });
+
+        const closeModal = () => {
+            document.getElementById('infoFrame').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        };
+
+        // Close modal by clicking anywhere
+        document.getElementById('overlay').addEventListener('click', closeModal);
+        document.getElementById('infoFrame').addEventListener('click', closeModal);
+    </script>
+
     <div class="disclaimer">
         Site is for demonstration only. Not an official F5 property.
     </div>

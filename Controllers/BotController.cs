@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 
 public class BotController : Controller
 {
@@ -50,6 +47,9 @@ public class BotController : Controller
 
             // Add the User-Agent header
             request.Headers.UserAgent.ParseAdd(userAgent);
+            
+            // Add the DemoApp header
+            request.Headers.Add("DemoApp", "Bot");
 
             // Send the POST request
             var response = await _httpClient.SendAsync(request);

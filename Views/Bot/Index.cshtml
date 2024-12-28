@@ -27,10 +27,26 @@
     </div>
     <div class="request-info-container" id="requestInfoContainer" style="margin-bottom: 10px;"></div>
 
-
     <div class="frame-container">
         <iframe class="frame" id="resultFrame"></iframe>
     </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <button id="infoButton" class="info-button">Info</button>
+    </div>
+
+    <div id="infoFrame" class="info-frame">
+        <div class="info-content">
+            <p>Click one of the "Bot" buttons to simulate an automated request. The request is a POST to the /login page. The client is a application server making a server-side request.</p>
+            <p></p>
+            <p><strong>Declared Bot:</strong> A request made by a client which declares it's a bot via the user-agent.</p>
+            <p>Signature-Based WAF polices will identifcy this client as a Malicious Bot.</p>
+            <p><strong>Obscured Bot:</strong> A request made by a client that is masquerading as a browser.</p>
+            <p>Signal-Based Bot Defense is required to detect and mitigate this type of automation.</p>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -73,6 +89,20 @@
             handleButtonClick('postButtonObscured', navigator.userAgent);
         });
 
+        // Info Button
+        document.getElementById('infoButton').addEventListener('click', () => {
+            document.getElementById('infoFrame').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        });
+
+        const closeModal = () => {
+            document.getElementById('infoFrame').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        };
+
+        // Close modal by clicking anywhere
+        document.getElementById('overlay').addEventListener('click', closeModal);
+        document.getElementById('infoFrame').addEventListener('click', closeModal);
 
     </script>
 

@@ -32,11 +32,38 @@
         <iframe class="frame" id="responseFrame" src="" frameborder="0"></iframe>
     </div>
 
+    <div style="text-align: center; margin-top: 20px;">
+        <button id="infoButton" class="info-button">Info</button>
+    </div>
+
+    <div id="infoFrame" class="info-frame">
+        <div class="info-content">
+            <p>Click one of the buttons to simulate a server response.</p>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
     <div class="script-container">
     <script>
         function loadResponse(url) {
             document.getElementById('responseFrame').src = url;
         }
+
+        // Info Button
+        document.getElementById('infoButton').addEventListener('click', () => {
+            document.getElementById('infoFrame').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        });
+
+        const closeModal = () => {
+            document.getElementById('infoFrame').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        };
+
+        // Close modal by clicking anywhere
+        document.getElementById('overlay').addEventListener('click', closeModal);
+        document.getElementById('infoFrame').addEventListener('click', closeModal);
     </script>
     </div>
 
