@@ -21,8 +21,8 @@
         </ul>
     </div>
     <div class="button-container">
-        <button class="button" id="postButtonSimple">Simple Bot</button>
-        <button class="button" id="postButtonComplex">Complex Bot</button>
+        <button class="button" id="postButtonDeclared">Declared Bot</button>
+        <button class="button" id="postButtonObscured">Obscured Bot</button>
     </div>
     <div class="request-info-container" id="urlDisplay" style="margin-bottom: 10px;"></div>
 
@@ -47,17 +47,17 @@
             urlDisplay.dataset.port = port;
         });
 
-        document.getElementById('postButtonSimple').addEventListener('click', async () => {
+        document.getElementById('postButtonDeclared').addEventListener('click', async () => {
             const protocol = document.getElementById('urlDisplay').dataset.protocol;
             const domain = document.getElementById('urlDisplay').dataset.domain;
             const port = document.getElementById('urlDisplay').dataset.port;
 
             // Get the name of the button clicked
-            const buttonName = document.getElementById('postButtonSimple').textContent;
+            const buttonName = document.getElementById('postButtonDeclared').textContent;
 
             // Update the URL display to include the button name
             const urlDisplay = document.getElementById('urlDisplay');
-            urlDisplay.textContent = `POST: ${protocol}://${domain}:${port}/login (Button: ${buttonName})`;
+            urlDisplay.textContent = `${buttonName} : ${protocol}://${domain}/login`;
 
             try {
                 const response = await fetch('/Bot/PostToLogin', {
@@ -67,7 +67,7 @@
                         protocol,
                         domain,
                         port,
-                        userAgent: 'DemoAppBot'  // User-Agent for Simple Bot
+                        userAgent: 'Mozilla/5.0 (compatible; Ask Jeeves/Teoma;)'  // User-Agent for Simple Bot
                     }),
                 });
 
@@ -78,7 +78,7 @@
             }
         });
 
-        document.getElementById('postButtonComplex').addEventListener('click', async () => {
+        document.getElementById('postButtonObscured').addEventListener('click', async () => {
             const protocol = document.getElementById('urlDisplay').dataset.protocol;
             const domain = document.getElementById('urlDisplay').dataset.domain;
             const port = document.getElementById('urlDisplay').dataset.port;
@@ -87,11 +87,11 @@
             const browserUserAgent = navigator.userAgent;
 
             // Get the name of the button clicked
-            const buttonName = document.getElementById('postButtonComplex').textContent;
+            const buttonName = document.getElementById('postButtonObscured').textContent;
 
             // Update the URL display to include the button name
             const urlDisplay = document.getElementById('urlDisplay');
-            urlDisplay.textContent = `POST: ${protocol}://${domain}:${port}/login (Button: ${buttonName})`;
+            urlDisplay.textContent = `${buttonName} : ${protocol}://${domain}/login`;
 
             try {
                 const response = await fetch('/Bot/PostToLogin', {
