@@ -25,50 +25,36 @@
         <button class="button" id="postButtonDeclared">Declared Bot</button>
         <button class="button" id="postButtonObscured">Obscured Bot</button>
     </div>
-    <div class="request-info-container" id="urlDisplay" style="margin-bottom: 10px;"></div>
+    <div class="request-info-container" id="requestInfoContainer" style="margin-bottom: 10px;"></div>
+
 
     <div class="frame-container">
         <iframe class="frame" id="resultFrame"></iframe>
     </div>
 
     <script>
-        // Clear the URL display when the page initially loads
         document.addEventListener('DOMContentLoaded', () => {
-            const urlDisplay = document.getElementById('urlDisplay');
-            urlDisplay.textContent = ''; // Clear any existing content
-
-            // Construct and display the URL when a button is pressed
-            const protocol = window.location.protocol.replace(':', ''); // Remove the trailing colon
-            const domain = window.location.hostname;
-            const port = window.location.port || (protocol === 'https' ? '443' : '80'); // Default ports
-
-            // Store for use in the POST request
-            urlDisplay.dataset.protocol = protocol;
-            urlDisplay.dataset.domain = domain;
-            urlDisplay.dataset.port = port;
+            // Clear the request info container when the page initially loads
+            const requestInfoContainer = document.getElementById('requestInfoContainer');
+            requestInfoContainer.textContent = ''; // Clear any existing content
         });
 
-        document.getElementById('postButtonDeclared').addEventListener('click', async () => {
-            const protocol = document.getElementById('urlDisplay').dataset.protocol;
-            const domain = document.getElementById('urlDisplay').dataset.domain;
-            const port = document.getElementById('urlDisplay').dataset.port;
+        const handleButtonClick = async (buttonId, userAgent) => {
+            const buttonName = document.getElementById(buttonId).textContent;
 
-            // Get the name of the button clicked
-            const buttonName = document.getElementById('postButtonDeclared').textContent;
-
-            // Update the URL display to include the button name
-            const urlDisplay = document.getElementById('urlDisplay');
-            urlDisplay.textContent = `${buttonName} : ${protocol}://${domain}/login`;
+            // Update the request info container with only the button name
+            const requestInfoContainer = document.getElementById('requestInfoContainer');
+            requestInfoContainer.textContent = `${buttonName}`;
 
             try {
                 const response = await fetch('/Bot/PostToLogin', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: new URLSearchParams({
-                        protocol,
-                        domain,
-                        port,
-                        userAgent: 'Mozilla/5.0 (compatible; Ask Jeeves/Teoma;)'  // User-Agent
+                        protocol: window.location.protocol.replace(':', ''),
+                        domain: window.location.hostname,
+                        port: window.location.port || (window.location.protocol === 'https:' ? '443' : '80'),
+                        userAgent: userAgent,
                     }),
                 });
 
@@ -77,41 +63,17 @@
             } catch (error) {
                 document.getElementById('resultFrame').srcdoc = `<p style="color: red;">Error: ${error.message}</p>`;
             }
+        };
+
+        document.getElementById('postButtonDeclared').addEventListener('click', () => {
+            handleButtonClick('postButtonDeclared', 'Mozilla/5.0 (compatible; Ask Jeeves/Teoma;)');
         });
 
-        document.getElementById('postButtonObscured').addEventListener('click', async () => {
-            const protocol = document.getElementById('urlDisplay').dataset.protocol;
-            const domain = document.getElementById('urlDisplay').dataset.domain;
-            const port = document.getElementById('urlDisplay').dataset.port;
-
-            // Get the user agent of the client's browser
-            const browserUserAgent = navigator.userAgent;
-
-            // Get the name of the button clicked
-            const buttonName = document.getElementById('postButtonObscured').textContent;
-
-            // Update the URL display to include the button name
-            const urlDisplay = document.getElementById('urlDisplay');
-            urlDisplay.textContent = `${buttonName} : ${protocol}://${domain}/login`;
-
-            try {
-                const response = await fetch('/Bot/PostToLogin', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams({
-                        protocol,
-                        domain,
-                        port,
-                        userAgent: browserUserAgent  // User-Agent set to client's browser User-Agent
-                    }),
-                });
-
-                const text = await response.text();
-                document.getElementById('resultFrame').srcdoc = text;
-            } catch (error) {
-                document.getElementById('resultFrame').srcdoc = `<p style="color: red;">Error: ${error.message}</p>`;
-            }
+        document.getElementById('postButtonObscured').addEventListener('click', () => {
+            handleButtonClick('postButtonObscured', navigator.userAgent);
         });
+
+
     </script>
 
     <div class="disclaimer">
