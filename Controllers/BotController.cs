@@ -48,8 +48,9 @@ public class BotController : Controller
             // Add the User-Agent header
             request.Headers.UserAgent.ParseAdd(userAgent);
             
-            // Add the DemoApp header
+            // Add more to header
             request.Headers.Add("DemoApp", "Bot");
+            request.Headers.Add("Accept", "*/*");
 
             // Send the POST request
             var response = await _httpClient.SendAsync(request);
