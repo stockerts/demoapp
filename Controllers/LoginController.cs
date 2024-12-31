@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 public class LoginController : Controller
 {
     private readonly IConfiguration _configuration;
@@ -29,6 +28,20 @@ public class LoginController : Controller
         }
     }
 
+    [HttpGet]
+    public IActionResult LoggedInBot()
+    {
+        // Check if user is authenticated
+        if (HttpContext.Session.GetString("IsAuthenticated") == "true")
+        {
+            return View("LoggedInBot", "Login");
+        }
+        else
+        {
+            return RedirectToAction("Index", "Login");
+        }
+    }
+
     [HttpPost]
     public IActionResult Index(string username, string password)
     {
@@ -39,6 +52,13 @@ public class LoginController : Controller
         {
             // Authentication successful, store in session
             HttpContext.Session.SetString("IsAuthenticated", "true");
+
+            // Check for DemoApp header
+            if (Request.Headers.TryGetValue("DemoApp", out var headerValue) && headerValue == "Bot")
+            {
+                return RedirectToAction("LoggedInBot", "Login");
+            }
+
             return RedirectToAction("LoggedIn", "Login");
         }
         else

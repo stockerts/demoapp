@@ -17,6 +17,7 @@
             <li><a href="/client">Client</a></li>
             <li><a href="/response">Response</a></li>
             <li><a href="/attack">Attack</a></li>
+            <li><a href="/bot">Bot</a></li>
             <li><a href="/login">Login</a></li>
         </ul>
     </div>
@@ -25,7 +26,7 @@
         <button class="button" onclick="loadPage('/Attack/SQL?age=5%27%20OR%20%271%27=%271')">SQL</button>
         <button class="button" onclick="loadPage('/Attack/DIR?file=../../hidden_agenda.txt')">DIR</button>
         <button class="button" onclick="loadPage('/Attack/XSS?update=%3Cscript%3Ealert%28%27XSS%27%29%3B%3C%2Fscript%3E')">XSS</button>
-        <button class="button" onclick="loginPost()">Bot</button>
+        <!--<button class="button" onclick="loginPost()">Bot</button>-->
     </div>
 
     <div class="request-info-container"></div>
@@ -34,6 +35,21 @@
         <iframe class="frame" id="pageFrame"></iframe>
     </div>
 
+    <div style="text-align: center; margin-top: 20px;">
+        <button id="infoButton" class="info-button">Info</button>
+    </div>
+
+    <div id="infoFrame" class="info-frame">
+        <div class="info-content">
+            <p>Click one of the buttons to simulate an attack. These patterns of attacks can be identified and migited by a WAF.</p>
+            <p><strong>SQL Injection:</strong> Attacker manipulates a web application's database query by injecting malicious SQL code into input fields, allowing them to retrieve, modify, or delete data from the database.</p>
+            <p><strong>Path Traversal:</strong> This attack occurs when an attacker exploits a vulnerability in an application to access restricted files or directories on the server by manipulating file paths.</p>
+            <p><strong>Cross-Site Scripting:</strong> Attacker injects malicious scripts into web pages viewed by other users, typically executed in the victim's browser to steal cookies, session tokens, or perform other malicious actions..</p>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
     <div class="script-container">
         <script>
             function loadPage(url) {
@@ -41,7 +57,7 @@
                 document.getElementById('pageFrame').src = url;
 
                 // Decode the URL to remove encoding
-                var decodedUrl = decodeURIComponent(url)
+                var decodedUrl = decodeURIComponent(url);
 
                 // Get the container element
                 var requestContainer = document.querySelector('.request-info-container');
@@ -58,32 +74,48 @@
 
             function loginPost() {
                 var xhr = new XMLHttpRequest();
-                var url = '/login/index';
+                var url = '/login';
                 xhr.open('POST', url, true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Adding Content-Type header
+                xhr.setRequestHeader('User-Agent', 'DemoAppBot/1.0'); // Adding a custom User-Agent header
                 
-                // Update the request-info-container for login action
-                var requestContainer = document.querySelector('.request-info-container');
-                requestContainer.innerHTML = "Request Info: direct login POST with credentials";
-
                 // The POST body content
                 var body = 'username=admin&password=admin';
                 
+                // Update the request-info-container with the request details
+                var requestContainer = document.querySelector('.request-info-container');
+                requestContainer.innerHTML = ''; // Clear any existing content
+                var requestText = document.createTextNode("Request URI: POST " + url);
+                requestContainer.appendChild(requestText);
+
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4) {
-                        if (xhr.status === 200 && xhr.responseText.includes("Login") && xhr.responseText.includes("Successful")) {
-                            // Redirect to bot page upon successful login
-                            document.getElementById('pageFrame').src = '/attack/bot';
-                        } else {
-                            // Redirect to bot_fail page upon failed login
-                            document.getElementById('pageFrame').src = '/attack/bot_fail';
-                        }
+                        // Display the response in the iframe
+                        var iframe = document.getElementById('pageFrame');
+                        iframe.contentDocument.open();
+                        iframe.contentDocument.write(xhr.responseText);
+                        iframe.contentDocument.close();
                     }
                 };
                 
                 // Send the POST request
                 xhr.send(body);
             }
+        // Info Button
+        document.getElementById('infoButton').addEventListener('click', () => {
+            document.getElementById('infoFrame').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        });
+
+        const closeModal = () => {
+            document.getElementById('infoFrame').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        };
+
+        // Close modal by clicking anywhere
+        document.getElementById('overlay').addEventListener('click', closeModal);
+        document.getElementById('infoFrame').addEventListener('click', closeModal);
+
         </script>
     </div>
 

@@ -1,6 +1,7 @@
 var builder = WebApplication.CreateBuilder(args); // Create new application builder
 
 builder.Services.AddControllersWithViews(); // Adds support for MVC controllers and views
+builder.Services.AddHttpClient(); // Adds support for server-side requests
 
 builder.Services.AddSession(options =>
 {
@@ -17,6 +18,7 @@ app.UseStatusCodePagesWithReExecute("/Home/NotFound"); // Error redirect
 app.UseStaticFiles(); // Enable static file presentation like images
 app.UseRouting(); // Enable middleware routing
 app.UseSession(); // Enable session state
+
 
 app.MapControllerRoute(
 name: "default",

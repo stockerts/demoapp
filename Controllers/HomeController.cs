@@ -7,6 +7,11 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Info()
+    {
+        return View("Info");
+    }
+
     // Action method to handle the 404 error
     public IActionResult NotFound()
     {
