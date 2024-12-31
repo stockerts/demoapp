@@ -14,16 +14,17 @@
     <div class="menu-container">
         <ul class="menu">
             <li><a href="/home">Home</a></li>
-            <li><a href="/client">Client</a></li>
             <li><a href="/response">Response</a></li>
             <li><a href="/attack">Attack</a></li>
             <li><a href="/bot">Bot</a></li>
+            <li><a href="/rate">Rate</a></li>
+            <li><a href="/client">Client</a></li>
             <li><a href="/login">Login</a></li>
         </ul>
     </div>
     <div class="button-container">
         <button class="button" id="postButtonDeclared">Declared Bot</button>
-        <button class="button" id="postButtonObscured">Obscured Bot</button>
+        <button class="button" id="postButtonMasked">Masked Bot</button>
     </div>
     <div class="request-info-container" id="requestInfoContainer" style="margin-bottom: 10px;"></div>
 
@@ -41,7 +42,7 @@
             <p></p>
             <p><strong>Declared Bot:</strong> A request made by a client which declares it's a bot via the user-agent.</p>
             <p>Signature-Based WAF polices will identify this client as a Malicious Bot.</p>
-            <p><strong>Obscured Bot:</strong> A request made by a client that is masquerading as a browser.</p>
+            <p><strong>Masked Bot:</strong> A request made by a client that is masquerading as a browser.</p>
             <p>Signal-Based Bot Defense is required to detect and mitigate this type of automation.</p>
         </div>
     </div>
@@ -85,8 +86,8 @@
             handleButtonClick('postButtonDeclared', 'Mozilla/5.0 (compatible; Ask Jeeves/Teoma;)');
         });
 
-        document.getElementById('postButtonObscured').addEventListener('click', () => {
-            handleButtonClick('postButtonObscured', navigator.userAgent);
+        document.getElementById('postButtonMasked').addEventListener('click', () => {
+            handleButtonClick('postButtonMasked', navigator.userAgent);
         });
 
         // Info Button

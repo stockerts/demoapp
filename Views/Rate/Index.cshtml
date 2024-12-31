@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>DemoApp</title>
+    <link rel="icon" href="/images/f5-logo.svg">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <div class="banner-container">
+        <img src="/images/f5-logo.svg" class="img-logo">
+        <img src="/images/demo-app-title.png" class="img-logo-text">
+    </div>
+
+    <div class="menu-container">
+        <ul class="menu">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/response">Response</a></li>
+            <li><a href="/attack">Attack</a></li>
+            <li><a href="/bot">Bot</a></li>
+            <li><a href="/rate">Rate</a></li>
+            <li><a href="/client">Client</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
+    </div>
+
+    <div class="rate-container">
+        <!-- Request Amount and Time Frame Section -->
+        <div class="input-container">
+            <!-- Request Amount Section -->
+            <div class="input-item">
+                <label for="reqNumber">Requests</label>
+                <input type="number" id="reqNumber" min="1" placeholder="Amount">
+            </div>
+
+            <!-- Time Frame Section -->
+            <div class="input-item">
+                <label for="timeSec">Time</label>
+                <input type="number" id="timeSec" min="1" placeholder="Seconds">
+            </div>
+
+            <!-- Start Button Section -->
+            <div>
+                <button id="startRateButton" class="button">Start</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add padding between menu-container and frame-container -->
+    <div class="frame-container">
+        <iframe class="frame" id="pageFrame"></iframe>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <button id="infoButton" class="info-button">Info</button>
+    </div>
+
+    <div id="infoFrame" class="info-frame">
+        <div class="info-content">
+            <p>Enter the number of requests and the time frame, then press Start. This will simulate an attack or overuse scenario on a web application, which can be mitigated with rate limiting.</p>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+    <div class="script-container">
+        <script>
+            async function sendRequests() {
+                const reqNumber = parseInt(document.getElementById('reqNumber').value, 10);
+                const timeSec = parseInt(document.getElementById('timeSec').value, 10);
+
+                // Validate inputs
+                if (!reqNumber || reqNumber <= 0) {
+                    alert("Please enter a valid number of requests.");
+                    return;
+                }
+
+                if (!timeSec || timeSec <= 0) {
+                    alert("Please enter a valid time in seconds.");
+                    return;
+                }
+
+                // Calculate the interval between requests in milliseconds
+                const interval = (timeSec * 1000) / reqNumber;
+
+                // Perform the requests
+                for (let i = 0; i < reqNumber; i++) {
+                    setTimeout(() => {
+                        const iframe = document.getElementById('pageFrame');
+                        const url = `/Rate/RateResult?reqNumber=${i + 1}&timeSec=${timeSec}`;
+                        iframe.src = url;
+                    }, i * interval);
+                }
+            }
+
+            // Attach the function to the button
+            document.getElementById('startRateButton').addEventListener('click', sendRequests);
+            
+            // Info Button
+            document.getElementById('infoButton').addEventListener('click', () => {
+                document.getElementById('infoFrame').style.display = 'block';
+                document.getElementById('overlay').style.display = 'block';
+            });
+
+            const closeModal = () => {
+                document.getElementById('infoFrame').style.display = 'none';
+                document.getElementById('overlay').style.display = 'none';
+            };
+
+            // Close modal by clicking anywhere
+            document.getElementById('overlay').addEventListener('click', closeModal);
+            document.getElementById('infoFrame').addEventListener('click', closeModal);
+
+        </script>
+    </div>
+
+    <div class="disclaimer">
+        Site is for demonstration only. Not an official F5 property.
+    </div>
+</body>
+</html>

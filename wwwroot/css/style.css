@@ -472,3 +472,51 @@
     font-size: 14px;
     line-height: 1.6;
 }
+
+/* Rate Container Styling */
+.rate-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10px
+}
+
+/* Input Container */
+.input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Input Items */
+.input-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+    .input-item label {
+        margin-bottom: 0;
+    }
+
+/* Input Fields */
+input[type="number"] {
+    width: 75px;
+}
+
+/* Button Styling */
+#startRateButton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+    #startRateButton:hover {
+        background-color: #003366;
+    }
