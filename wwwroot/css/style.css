@@ -101,6 +101,11 @@
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
+p {
+    color: #000000;
+    font-size: 16px;
+}
+
 .h3-title {
     color: #000000;
     font-size: 24px;
@@ -203,6 +208,7 @@
     .clientinfo-container h1 {
         text-align: center;
         margin-top: 0;
+        font-size: 24px;
     }
 
 .clientinfo-table {
@@ -237,6 +243,7 @@
     .clientheader-container h1 {
         text-align: center;
         margin-top: 0;
+        font-size: 24px;
     }
 
 .clientheader-table {
@@ -251,6 +258,7 @@
         border: 1px solid rgba(0, 0, 0, 0);
         word-break: break-all;
         overflow-wrap: break-word;
+        font-size: 16px;
     }
 
     .clientheader-table th {
@@ -259,12 +267,7 @@
         width: 30%;
         vertical-align: top;
         text-align: left;
-    }
-
-    .clientheader-table td {
-        padding: 10px;
-        border: 1px solid rgba(0, 0, 0, 0);
-        text-align: left;
+        font-size: 16px;
     }
 
 .button-container {
@@ -418,7 +421,7 @@
 .info-frame {
     display: none;
     position: fixed;
-    top: 30%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
@@ -472,3 +475,51 @@
     font-size: 14px;
     line-height: 1.6;
 }
+
+/* Rate Container Styling */
+.rate-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10px
+}
+
+/* Input Container */
+.input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Input Items */
+.input-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+    .input-item label {
+        margin-bottom: 0;
+    }
+
+/* Input Fields */
+input[type="number"] {
+    width: 75px;
+}
+
+/* Button Styling */
+#startRateButton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+    #startRateButton:hover {
+        background-color: #003366;
+    }
