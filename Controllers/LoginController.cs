@@ -31,15 +31,7 @@ public class LoginController : Controller
     [HttpGet]
     public IActionResult LoggedInBot()
     {
-        // Check if user is authenticated
-        if (HttpContext.Session.GetString("IsAuthenticated") == "true")
-        {
-            return View("LoggedInBot", "Login");
-        }
-        else
-        {
-            return RedirectToAction("Index", "Login");
-        }
+        return View("LoggedInBot", "Login");
     }
 
     [HttpPost]
