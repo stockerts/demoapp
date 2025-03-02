@@ -15,7 +15,7 @@
         <ul class="menu">
             <li><a href="/home">Home</a></li>
             <li><a href="/response">Response</a></li>
-            <li><a href="/attack">Attack</a></li>
+            <li><a href="/waf">WAF</a></li>
             <li><a href="/bot">Bot</a></li>
             <li><a href="/rate">Rate</a></li>
             <li><a href="/client">Client</a></li>
@@ -24,9 +24,9 @@
     </div>
 
     <div class="button-container">
-        <button class="button" onclick="loadPage('/Attack/SQL?age=5%27%20OR%20%271%27=%271')">SQL</button>
-        <button class="button" onclick="loadPage('/Attack/DIR?file=../../hidden_agenda.txt')">DIR</button>
-        <button class="button" onclick="loadPage('/Attack/XSS?update=%3Cscript%3Ealert%28%27XSS%27%29%3B%3C%2Fscript%3E')">XSS</button>
+        <button class="button" onclick="loadPage('/WAF/SQL?age=5%27%20OR%20%271%27=%271')">SQL</button>
+        <button class="button" onclick="loadPage('/WAF/DIR?file=../../hidden_agenda.txt')">DIR</button>
+        <button class="button" onclick="loadPage('/WAF/XSS?update=%3Cscript%3Ealert%28%27XSS%27%29%3B%3C%2Fscript%3E')">XSS</button>
         <!--<button class="button" onclick="loginPost()">Bot</button>-->
     </div>
 
