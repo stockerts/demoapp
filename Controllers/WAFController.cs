@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-public class AttackController : Controller
+public class WAFController : Controller
 {
     public IActionResult Index()
     {
@@ -20,13 +20,4 @@ public class AttackController : Controller
     {
         return View("XSS");
     }
-    public IActionResult Bot()
-    {
-        return View("Bot");
-    }
-    public IActionResult Bot_Fail()
-    {
-        return View("Bot_Fail");
-    }
-
 }
