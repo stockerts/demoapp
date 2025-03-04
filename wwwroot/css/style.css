@@ -219,7 +219,7 @@ p {
     .clientinfo-table th,
     .clientinfo-table td {
         padding: 10px;
-        border: 1px solid rgba(0, 0, 0, 0);
+        border: none;
         text-align: left;
         word-break: break-all;
         overflow-wrap: break-word;
@@ -230,6 +230,11 @@ p {
         color: black;
         width: 20%;
         vertical-align: top;
+    }
+
+    .clientinfo-table tr:not(:first-child) th,
+    .clientinfo-table tr:not(:first-child) td {
+        border-top: 1px solid #ccc;
     }
 
 .clientheader-container {
@@ -255,7 +260,8 @@ p {
     .clientheader-table th,
     .clientheader-table td {
         padding: 10px;
-        border: 1px solid rgba(0, 0, 0, 0);
+        /*border: 1px solid rgba(0, 0, 0, 0);*/
+        border: none;
         word-break: break-all;
         overflow-wrap: break-word;
         font-size: 16px;
@@ -268,6 +274,11 @@ p {
         vertical-align: top;
         text-align: left;
         font-size: 16px;
+    }
+
+    .clientheader-table tr:not(:first-child) th,
+    .clientheader-table tr:not(:first-child) td {
+        border-top: 1px solid #ccc;
     }
 
 .button-container {
@@ -402,7 +413,7 @@ p {
 }
 
 /* Info button */
-.info-button {
+        .info-button {
     padding: 10px 20px;
     background-color: rebeccapurple;
     color: white;
