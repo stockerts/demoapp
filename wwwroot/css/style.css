@@ -122,26 +122,6 @@ p {
     text-align: center;
 }
 
-.image-container {
-    width: 650px;
-    margin: 20px auto;
-    background-color: white;
-    vertical-align: middle;
-    border-radius: 4px;
-    text-align: center;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.image-container-2 {
-    width: 475px;
-    margin: 20px auto;
-    background-color: white;
-    vertical-align: middle;
-    border-radius: 4px;
-    text-align: center;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
 .login-container {
     width: 300px;
     margin: 20px auto;
@@ -186,15 +166,6 @@ p {
                 background-color: #333;
                 background-color: #003366;
             }
-
-.table-container {
-    background-color: #ffffff;
-    border-radius: 10px;
-    width: 800px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    overflow: hidden;
-}
 
 .clientinfo-container {
     background-color: #ffffff;
@@ -315,19 +286,6 @@ p {
     align-items: center;
 }
 
-.test-container {
-    width: 500px;
-    height: 50px;
-    margin: 0 auto;
-    padding: 10px;
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .frame-container {
     width: 500px;
     margin: 0 auto;
@@ -343,22 +301,6 @@ p {
     width: 100%;
     height: 375px;
     border: 0px;
-}
-
-.table-frame-container {
-    width: 950px;
-    margin: 0 auto;
-    padding: 0px;
-    margin-top: 1px;
-    border: 0px solid #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.table-frame {
-    width: 100%;
-    height: 250px;
-    border: none;
 }
 
 .script-container {
@@ -379,22 +321,6 @@ p {
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.error-content-container {
-    width: 250px;
-    height: 50px;
-    margin: 20px auto;
-    background-color: #ffffff;
-    border-radius: 4px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
 .disclaimer {
     text-align: center;
     margin-top: 20px;
@@ -413,7 +339,7 @@ p {
 }
 
 /* Info button */
-        .info-button {
+.info-button {
     padding: 10px 20px;
     background-color: rebeccapurple;
     color: white;
@@ -446,29 +372,6 @@ p {
     cursor: pointer;
 }
 
-/* Info frame header */
-.info-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-/* Close button */
-.close-button {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: #000;
-}
-
-    .close-button:hover {
-        color: red;
-    }
-
-/* Overlay for modal */
 .overlay {
     display: none;
     position: fixed;
@@ -487,7 +390,6 @@ p {
     line-height: 1.6;
 }
 
-/* Rate Container Styling */
 .rate-container {
     display: flex;
     justify-content: center;
@@ -496,7 +398,6 @@ p {
     padding-top: 10px
 }
 
-/* Input Container */
 .input-container {
     display: flex;
     flex-direction: row;
@@ -504,7 +405,6 @@ p {
     gap: 20px;
 }
 
-/* Input Items */
 .input-item {
     display: flex;
     flex-direction: row;
@@ -516,12 +416,6 @@ p {
         margin-bottom: 0;
     }
 
-/* Input Fields */
-input[type="number"] {
-    width: 75px;
-}
-
-/* Button Styling */
 #startRateButton {
     display: inline-block;
     padding: 10px 20px;
