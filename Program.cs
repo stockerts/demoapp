@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi.Any;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args); // Create new application builder
@@ -26,9 +27,43 @@ builder.Services.AddSwaggerGen(options =>
         Description = "Use to create mock requests and responses. Not an official F5 property."
     });
 
-    // Include XML comments
+    // Include XML comments for better documentation (keep this as is)
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
+    // Add example values for MessageModel properties
+    options.MapType<demobankapi.Controllers.messageservice.MessageModel>(() => new OpenApiSchema
+    {
+        Type = "object",
+        Properties =
+        {
+            ["firstName"] = new OpenApiSchema
+            {
+                Type = "string",
+                Example = new OpenApiString("Anthony")
+            },
+            ["lastName"] = new OpenApiSchema
+            {
+                Type = "string",
+                Example = new OpenApiString("Stark")
+            },
+            ["phoneNumber"] = new OpenApiSchema
+            {
+                Type = "string",
+                Example = new OpenApiString("(123) 456-7890")
+            },
+            ["email"] = new OpenApiSchema
+            {
+                Type = "string",
+                Example = new OpenApiString("tony.stark@starkindustries.com")
+            },
+            ["message"] = new OpenApiSchema
+            {
+                Type = "string",
+                Example = new OpenApiString("Hello, this is a sample message.")
+            }
+        }
+    });
 });
 
 var app = builder.Build();  // Build the application
