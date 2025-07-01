@@ -167,6 +167,10 @@ p {
                 background-color: #003366;
             }
 
+    .login-container input[type="submit"] {
+    font-size: 14px;
+    }
+
 .clientinfo-container {
     background-color: #ffffff;
     width: 800px;
@@ -339,7 +343,7 @@ p {
     vertical-align: middle;
 }
 
-/* Info button */
+
 .info-button {
     padding: 10px 20px;
     background-color: rebeccapurple;
@@ -355,7 +359,7 @@ p {
         background-color: black;
     }
 
-/* Info frame (modal) */
+
 .info-frame {
     display: none;
     position: fixed;
