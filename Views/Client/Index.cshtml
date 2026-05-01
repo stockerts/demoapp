@@ -13,14 +13,24 @@
             Client Information
         </h1>
         <table class="clientinfo-table">
+            @if (!string.IsNullOrWhiteSpace(Model.ClientIP))
+            {
+                <tr>
+                    <th>Client IP</th>
+                    <td>@Model.ClientIP<button class="copy-btn" data-value="@Model.ClientIP" aria-label="Copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></td>
+                </tr>
+            }
             <tr>
-                <th>IP Address</th>
+                <th>Source IP</th>
                 <td>@Model.IpAddress<button class="copy-btn" data-value="@ipOnly" aria-label="Copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></td>
             </tr>
-            <tr>
-                <th>Server Name</th>
-                <td>@Model.ServerName<button class="copy-btn" data-value="@Model.ServerName" aria-label="Copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></td>
-            </tr>
+            @if (!string.IsNullOrWhiteSpace(Model.ServerName))
+            {
+                <tr>
+                    <th>Server Name</th>
+                    <td>@Model.ServerName<button class="copy-btn" data-value="@Model.ServerName" aria-label="Copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></td>
+                </tr>
+            }
             <tr>
                 <th>X-Forwarded-For</th>
                 <td>

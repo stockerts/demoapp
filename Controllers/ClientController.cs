@@ -14,14 +14,8 @@ namespace Client.Controllers
 
         public IActionResult Index()
         {
-            // Get SERVER_NAME from environment variable
+            // Get SERVER_NAME from environment variable only
             var serverName = _configuration["SERVER_NAME"];
-
-            // Fallback to container hostname if not set or empty
-            if (string.IsNullOrWhiteSpace(serverName))
-            {
-                serverName = Environment.MachineName;
-            }
 
             // Get the client's IP address
             var ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
@@ -40,9 +34,15 @@ namespace Client.Controllers
             var host = HttpContext.Request.Headers["Host"].ToString();
             var userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
 
+            // Extract client IP from first value of X-Forwarded-For
+            var clientIp = !string.IsNullOrEmpty(xForwardedFor)
+                ? xForwardedFor.Split(',')[0].Trim()
+                : null;
+
             // Prepare model
             var model = new ClientInfoViewModel
             {
+                ClientIP = clientIp,
                 IpAddress = string.IsNullOrEmpty(ipAddress)
                     ? "Unable to determine IP address."
                     : $"{ipAddress} ({ipType})",
@@ -112,6 +112,7 @@ namespace Client.Controllers
 
     public class ClientInfoViewModel
     {
+        public string ClientIP { get; set; }
         public string IpAddress { get; set; }
         public string XForwardedFor { get; set; }
         public string Host { get; set; }
