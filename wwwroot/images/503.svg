@@ -1,0 +1,18 @@
+<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- Server 1 -->
+  <rect x="28" y="18" width="184" height="50" rx="9" fill="#003366"/>
+  <!-- Server 1 lights -->
+  <circle cx="182" cy="43" r="7" fill="#4ade80"/>
+  <circle cx="200" cy="43" r="7" fill="#4ade80"/>
+  <!-- Server 2 -->
+  <rect x="28" y="78" width="184" height="50" rx="9" fill="#003366"/>
+  <!-- Server 2 lights -->
+  <circle cx="182" cy="103" r="7" fill="#dc2626"/>
+  <circle cx="200" cy="103" r="7" fill="#dc2626"/>
+  <!-- Disconnection line -->
+  <line x1="120" y1="128" x2="120" y2="148" stroke="#dc2626" stroke-width="6" stroke-dasharray="6 4"/>
+  <!-- Large X below -->
+  <circle cx="120" cy="190" r="36" fill="#dc2626"/>
+  <line x1="104" y1="174" x2="136" y2="206" stroke="white" stroke-width="7" stroke-linecap="round"/>
+  <line x1="136" y1="174" x2="104" y2="206" stroke="white" stroke-width="7" stroke-linecap="round"/>
+</svg>

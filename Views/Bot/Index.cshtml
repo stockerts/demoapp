@@ -1,32 +1,8 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>DemoApp</title>
-    <link rel="icon" href="/images/f5-logo.svg">
-    <link rel="stylesheet" href="~/css/style.css">
-</head>
-<body>
-
-    <div class="banner-container">
-        <img src="/images/f5-logo.svg" class="img-logo">
-        <img src="/images/demo-app-title.png" class="img-logo-text">
-    </div>
-
-    <div class="menu-container">
-        <ul class="menu">
-            <li><a href="/home">Home</a></li>
-            <li><a href="/response">Response</a></li>
-            <li><a href="/waf">WAF</a></li>
-            <li><a href="/bot">Bot</a></li>
-            <li><a href="/rate">Rate</a></li>
-            <li><a href="/client">Client</a></li>
-            <li><a href="/login">Login</a></li>
-        </ul>
-    </div>
     <div class="button-container">
         <button class="button" id="postButtonDeclared">Declared Bot</button>
         <button class="button" id="postButtonMasked">Masked Bot</button>
     </div>
+
     <div class="request-info-container" id="requestInfoContainer"></div>
 
     <div class="frame-container">
@@ -40,7 +16,6 @@
     <div id="infoFrame" class="info-frame">
         <div class="info-content">
             <p>Click one of the "Bot" buttons to simulate an automated request. The request is a POST to the /login page. The client is a application server making a server-side request.</p>
-            <p></p>
             <p><strong>Declared Bot:</strong> A request made by a client which declares it's a bot via the user-agent.</p>
             <p>Signature-Based WAF polices will identify this client as a Malicious Bot.</p>
             <p><strong>Masked Bot:</strong> A request made by a client that is masquerading as a browser.</p>
@@ -50,19 +25,15 @@
 
     <div id="overlay" class="overlay"></div>
 
+@section Scripts {
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Clear the request info container when the page initially loads
-            const requestInfoContainer = document.getElementById('requestInfoContainer');
-            requestInfoContainer.textContent = ''; // Clear any existing content
+            document.getElementById('requestInfoContainer').textContent = '';
         });
 
         const handleButtonClick = async (buttonId, userAgent) => {
             const buttonName = document.getElementById(buttonId).textContent;
-
-            // Update the request info container with only the button name
-            const requestInfoContainer = document.getElementById('requestInfoContainer');
-            requestInfoContainer.textContent = `${buttonName}`;
+            document.getElementById('requestInfoContainer').textContent = buttonName;
 
             try {
                 const response = await fetch('/Bot/PostToLogin', {
@@ -75,11 +46,10 @@
                         userAgent: userAgent,
                     }),
                 });
-
                 const text = await response.text();
                 document.getElementById('resultFrame').srcdoc = text;
             } catch (error) {
-                document.getElementById('resultFrame').srcdoc = `<p style="color: red;">Error: ${error.message}</p>`;
+                document.getElementById('resultFrame').srcdoc = `<p style="color:red;">Error: ${error.message}</p>`;
             }
         };
 
@@ -91,7 +61,6 @@
             handleButtonClick('postButtonMasked', navigator.userAgent);
         });
 
-        // Info Button
         document.getElementById('infoButton').addEventListener('click', () => {
             document.getElementById('infoFrame').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
@@ -102,14 +71,7 @@
             document.getElementById('overlay').style.display = 'none';
         };
 
-        // Close modal by clicking anywhere
         document.getElementById('overlay').addEventListener('click', closeModal);
         document.getElementById('infoFrame').addEventListener('click', closeModal);
-
     </script>
-
-    <div class="disclaimer">
-        Site is for demonstration only. Not an official F5 property.
-    </div>
-</body>
-</html>
+}
