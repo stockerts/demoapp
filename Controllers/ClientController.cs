@@ -35,6 +35,12 @@ namespace Client.Controllers
             var userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
 
             // Extract client IP from first value of X-Forwarded-For
+            // Strip ports from each IP in X-Forwarded-For
+            if (!string.IsNullOrEmpty(xForwardedFor))
+            {
+                xForwardedFor = string.Join(", ", xForwardedFor.Split(',').Select(ip => StripPort(ip.Trim())));
+            }
+
             var clientIp = !string.IsNullOrEmpty(xForwardedFor)
                 ? xForwardedFor.Split(',')[0].Trim()
                 : null;
@@ -91,6 +97,20 @@ namespace Client.Controllers
                 return "Private";
 
             return "Public";
+        }
+
+        private string StripPort(string ip)
+        {
+            if (string.IsNullOrEmpty(ip)) return ip;
+            if (ip.StartsWith("["))
+            {
+                var bracket = ip.IndexOf(']');
+                return bracket > 0 ? ip.Substring(1, bracket - 1) : ip;
+            }
+            var colonCount = ip.Count(c => c == ':');
+            if (colonCount == 1)
+                return ip.Substring(0, ip.LastIndexOf(':'));
+            return ip;
         }
 
         private bool IsPrivateIP(IPAddress ip)
