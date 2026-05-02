@@ -935,11 +935,14 @@ body.response-page {
     }
 
     .request-info-container {
+        display: block;
         height: auto;
         min-height: 40px;
         word-break: break-all;
+        overflow-wrap: break-word;
         text-align: center;
         padding: 8px 12px;
+        line-height: 1.5;
     }
 
     /* Info modal */
@@ -971,6 +974,13 @@ body.response-page {
         flex-direction: column;
         gap: 12px;
         align-items: center;
+    }
+
+    /* Prevent iOS auto-zoom on input focus (triggered when font-size < 16px) */
+    .input-item input[type="number"],
+    .login-container form input[type="text"],
+    .login-container form input[type="password"] {
+        font-size: 16px;
     }
 
     /* Touch targets */
