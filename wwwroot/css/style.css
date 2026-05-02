@@ -932,23 +932,28 @@ body.response-page {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Frame / curl / request containers */
+    /* Frame / curl containers */
     .frame-container,
-    .request-info-container,
     .curl-details {
         width: calc(100vw - 32px);
         max-width: 500px;
     }
 
+    /* Hide request URI bar on mobile */
     .request-info-container {
-        display: block;
-        height: auto;
-        min-height: 40px;
-        word-break: break-all;
-        overflow-wrap: break-word;
-        text-align: center;
-        padding: 8px 12px;
-        line-height: 1.5;
+        display: none;
+    }
+
+    /* Rate: move frame above inputs */
+    .rate-layout {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .rate-layout .frame-container {
+        order: -1;
+        margin-bottom: 16px;
     }
 
     /* Info modal */
