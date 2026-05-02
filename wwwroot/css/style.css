@@ -932,28 +932,12 @@ body.response-page {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Frame / curl containers */
+    /* Frame / curl / request containers */
     .frame-container,
+    .request-info-container,
     .curl-details {
         width: calc(100vw - 32px);
         max-width: 500px;
-    }
-
-    /* Hide request URI bar on mobile */
-    .request-info-container {
-        display: none;
-    }
-
-    /* Rate: move frame above inputs */
-    .rate-layout {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .rate-layout .frame-container {
-        order: -1;
-        margin-bottom: 16px;
     }
 
     /* Info modal */
