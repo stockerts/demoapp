@@ -189,11 +189,6 @@ a:hover {
     margin: 0;
 }
 
-.version {
-    font-size: 11px;
-    color: var(--text-dim);
-    margin: 4px 0 0;
-}
 
 /* ── Home Grid ─────────────────────────────────────────────────── */
 
@@ -698,19 +693,24 @@ tr:hover .copy-btn {
 /* ── Request / Frame ───────────────────────────────────────────── */
 
 .request-info-container {
-    width: 500px;
-    height: 20px;
+    width: min(500px, calc(100vw - 32px));
+    min-height: 40px;
     margin: 0 auto 8px;
-    padding: 10px;
+    padding: 8px 12px;
     border: 1px solid var(--border);
     background-color: var(--surface);
     color: var(--text-muted);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     border-radius: var(--radius);
     font-size: 12px;
     font-family: ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    text-align: center;
+    line-height: 1.5;
     transition: background-color var(--transition), border-color var(--transition);
 }
 
