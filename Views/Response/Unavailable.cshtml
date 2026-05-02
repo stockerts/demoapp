@@ -1,21 +1,33 @@
-﻿<html>
+@{ Layout = null; }
+<!DOCTYPE html>
+<html>
 <head>
-    <title>DemoApp</title>
-    <link rel="icon" href="/images/f5-logo.svg">
-    <link rel="stylesheet" href="~/css/style.css">
+    <meta charset="utf-8">
+    <title>503</title>
+    <script>(function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
     <style>
-        body {
-            background-color: white;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; transition: background 0.15s ease, color 0.15s ease; }
+        .icon { color: #9ca3af; margin-bottom: 14px; }
+        .code { font-size: 26px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 4px; }
+        .desc { font-size: 12px; color: #6b7280; }
+        .result { text-align: center; }
+        [data-theme="dark"] body { background: #1a1a1a; color: #f0f0f0; }
+        [data-theme="dark"] .icon { color: #555; }
+        [data-theme="dark"] .desc { color: #888; }
     </style>
 </head>
 <body>
-
-    <div class="response-container">
-        <h1 class="h3-title">Error</h1>
-        <img src="~/images/503.png" height="250" width="250">
-        <h3 class="h3-title">Unavailable</h3>
+    <div class="result">
+        <div class="icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+        </div>
+        <p class="code">503</p>
+        <p class="desc">Service Unavailable</p>
     </div>
-
 </body>
 </html>

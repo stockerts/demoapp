@@ -1,0 +1,14 @@
+<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- Folder back -->
+  <rect x="20" y="76" width="160" height="124" rx="10" fill="#003366"/>
+  <!-- Folder tab -->
+  <path d="M20 76 L20 60 Q20 52 28 52 L82 52 Q94 52 98 62 L106 76 Z" fill="#003366"/>
+  <!-- Folder front highlight -->
+  <rect x="28" y="90" width="144" height="100" rx="7" fill="white" opacity="0.1"/>
+  <!-- Escape arrow: shaft going up-right out of folder -->
+  <line x1="90" y1="168" x2="175" y2="38" stroke="#dc2626" stroke-width="10" stroke-linecap="round"/>
+  <!-- Arrow head -->
+  <polygon points="175,38 155,50 185,60" fill="#dc2626"/>
+  <!-- Dashed boundary breach indicator -->
+  <rect x="140" y="20" width="80" height="80" rx="6" stroke="#dc2626" stroke-width="5" stroke-dasharray="8 5" opacity="0.6"/>
+</svg>

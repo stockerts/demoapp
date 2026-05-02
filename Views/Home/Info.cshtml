@@ -1,47 +1,51 @@
-﻿<html>
-<head>
-    <title>DemoApp</title>
-    <link rel="icon" href="/images/f5-logo.svg">
-    <link rel="stylesheet" href="~/css/style.css">
-</head>
-<body>
-    <div class="banner-container">
-        <img src="/images/f5-logo.svg" class="img-logo">
-        <img src="/images/demo-app-title.png" class="img-logo-text">
+    <div class="info-page-container">
+        <p>The DemoApp is designed to showcase various capabilities within F5's platforms. It provides a controlled environment for testing client interactions, server responses, and protective measures against potential security threats, such as attacks and automated bots.</p>
+
+        <div class="info-item">
+            <div class="info-item-label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                Response
+            </div>
+            <p>Generate application server responses. These responses can be viewed within event logs for troubleshooting, performance analysis, and understanding how the server reacts to various client interactions and requests.</p>
+        </div>
+
+        <div class="info-item">
+            <div class="info-item-label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                WAF
+            </div>
+            <p>Simulate a number of simple attacks, such as SQL injection or cross-site scripting (XSS), within a controlled environment. These simulated attacks help demonstrate how vulnerabilities can be exploited and how Web Application Firewalls (WAFs) can effectively mitigate such threats.</p>
+        </div>
+
+        <div class="info-item">
+            <div class="info-item-label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                Bot
+            </div>
+            <p>Execute server-side automated requests to an application's login page. It simulates an automated attack scenario, such as credential stuffing or brute-force attempts, and highlights the importance of advanced security measures like WAF and Bot Protection in mitigating such risks.</p>
+        </div>
+
+        <div class="info-item">
+            <div class="info-item-label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="4"/><line x1="12" y1="20" x2="12" y2="10"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+                Rate
+            </div>
+            <p>Specify the number of requests a user can make to a web application within a set timeframe, validating controls like rate limiting to prevent abuse and ensure system stability.</p>
+        </div>
+
+        <div class="info-item">
+            <div class="info-item-label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                Client
+            </div>
+            <p>Client information represents the data that the application server receives from client requests, such as headers, cookies, and IP addresses. This information is crucial for understanding how clients interact with the server and enables the implementation of desired security measures.</p>
+        </div>
+
+        <div class="info-item">
+            <div class="info-item-label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Login
+            </div>
+            <p>The login feature provides a simple user authentication interface. It serves as a surface for demonstrating security attack simulations, such as credential-based attacks, and emphasizes the need for robust login mechanisms and protective measures to secure sensitive user data.</p>
+        </div>
     </div>
-
-    <div class="menu-container">
-        <ul class="menu">
-            <li><a href="/home">Home</a></li>
-            <li><a href="/response">Response</a></li>
-            <li><a href="/waf">WAF</a></li>
-            <li><a href="/bot">Bot</a></li>
-            <li><a href="/rate">Rate</a></li>
-            <li><a href="/client">Client</a></li>
-            <li><a href="/login">Login</a></li>
-        </ul>
-    </div>
-
-    <div class="clientinfo-container">
-        <h3 class ="h3-title">Demonstration Application</h3>
-        <p>The Demonstration Application is designed to showcase various capabilities within F5's platforms. It provides a controlled environment for testing client interactions, server responses, and protective measures against potential security threats, such as attacks and automated bots. This serves as a practical tool for learning, development, and demonstrating web security practices.</p>
-
-        <p><strong>Response:</strong> Generate application server responses. These responses can be viewed within event logs for troubleshooting, performance analysis, and understanding how the server reacts to various client interactions and requests.</p>
-
-        <p><strong>WAF:</strong> Simulate a number of simple attacks, such as SQL injection or cross-site scripting (XSS), within a controlled environment. These simulated attacks help demonstrate how vulnerabilities can be exploited and how Web Application Firewalls (WAFs) can effectively mitigate such threats.</p>
-
-        <p><strong>Bot:</strong> Execute server-side automated requests to an application's login page. It simulates an automated attack scenario, such as credential stuffing or brute-force attempts, and highlights the importance of advanced security measures like WAF and Bot Protection in mitigating such risks.</p>
-
-        <p><strong>Rate:</strong> Specify the number of requests a user can make to a web application within a set timeframe, validating controls like rate limiting to prevent abuse and ensure system stability.</p>
-
-        <p><strong>Client:</strong> Client information represents the data that the application server receives from client requests, such as headers, cookies, and IP addresses. This information is crucial for understanding how clients interact with the server and enables the implementation of desired security measures.</p>
-
-        <p><strong>Login:</strong> The login feature provides a simple user authentication interface. It serves as a surface for demonstrating security attack simulations, such as credential-based attacks, and emphasizes the need for robust login mechanisms and protective measures to secure sensitive user data.</p>
-    </div>
-
-    <div class="disclaimer">
-        Site is for demonstration only. Not an official F5 property.
-    </div>
-
-</body>
-</html>

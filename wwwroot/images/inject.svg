@@ -1,0 +1,17 @@
+<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- Database: top ellipse -->
+  <ellipse cx="104" cy="66" rx="60" ry="20" stroke="#003366" stroke-width="10"/>
+  <!-- Database: side walls -->
+  <line x1="44" y1="66" x2="44" y2="156" stroke="#003366" stroke-width="10"/>
+  <line x1="164" y1="66" x2="164" y2="156" stroke="#003366" stroke-width="10"/>
+  <!-- Database: mid ellipse -->
+  <ellipse cx="104" cy="111" rx="60" ry="20" stroke="#003366" stroke-width="6" opacity="0.4"/>
+  <!-- Database: bottom ellipse -->
+  <ellipse cx="104" cy="156" rx="60" ry="20" stroke="#003366" stroke-width="10"/>
+  <!-- Syringe barrel -->
+  <rect x="165" y="34" width="40" height="16" rx="5" fill="#dc2626" transform="rotate(45 185 42)"/>
+  <!-- Syringe needle (arrow into DB) -->
+  <line x1="196" y1="44" x2="158" y2="82" stroke="#dc2626" stroke-width="8" stroke-linecap="round"/>
+  <!-- Arrow tip -->
+  <polygon points="152,86 166,74 170,90" fill="#dc2626"/>
+</svg>
