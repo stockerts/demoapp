@@ -841,3 +841,156 @@ body.response-page {
 #startRateButton:hover {
     background-color: var(--primary-hover);
 }
+
+/* ── Nav Toggle (hamburger) ────────────────────────────────────── */
+
+.nav-toggle {
+    display: none;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.nav-toggle:hover {
+    background-color: var(--surface-alt);
+    color: var(--text);
+    border-color: var(--text-muted);
+}
+
+/* ── Touch devices: always show copy buttons ───────────────────── */
+
+@media (hover: none) {
+    .copy-btn { opacity: 1; }
+}
+
+/* ── Mobile (≤768px) ───────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+
+    /* Header: make room for hamburger */
+    .site-header {
+        grid-template-columns: 1fr auto auto;
+        gap: 8px;
+    }
+
+    /* Nav: collapse to fixed dropdown below header */
+    .site-nav {
+        display: none;
+        position: fixed;
+        top: 52px;
+        left: 0;
+        right: 0;
+        background-color: var(--nav-bg);
+        border-bottom: 1px solid var(--border);
+        z-index: 99;
+    }
+
+    .site-header.nav-open .site-nav {
+        display: block;
+    }
+
+    .menu {
+        flex-direction: column;
+        gap: 0;
+        padding: 6px 0;
+    }
+
+    .menu a {
+        display: block;
+        padding: 11px 20px;
+        border-radius: 0;
+    }
+
+    .nav-sep {
+        width: auto;
+        height: 1px;
+        margin: 4px 16px;
+    }
+
+    /* Show hamburger button */
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* Home grid: fluid 2-column */
+    .home-grid {
+        width: calc(100vw - 32px);
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Frame / curl / request containers */
+    .frame-container,
+    .request-info-container,
+    .curl-details {
+        width: calc(100vw - 32px);
+        max-width: 500px;
+    }
+
+    /* Info modal */
+    .info-frame {
+        width: calc(100vw - 32px);
+        max-width: 420px;
+    }
+
+    /* Login */
+    .login-container {
+        width: calc(100vw - 32px);
+        max-width: 320px;
+    }
+
+    /* Client / Header containers */
+    .clientinfo-container,
+    .clientheader-container {
+        padding: 20px 16px;
+    }
+
+    /* About / info page */
+    .info-page-container {
+        width: calc(100vw - 32px);
+        max-width: 640px;
+    }
+
+    /* Rate: stack inputs vertically */
+    .input-container {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+
+    /* Touch targets */
+    .button,
+    .info-button {
+        min-height: 44px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+/* ── Small phones (≤480px) ─────────────────────────────────────── */
+
+@media (max-width: 480px) {
+
+    /* Home grid: single column */
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Client/Header table: tighten label column */
+    .clientinfo-table th,
+    .clientheader-table th {
+        width: 35%;
+        font-size: 11px;
+    }
+
+    .clientinfo-container,
+    .clientheader-container {
+        padding: 16px 12px;
+    }
+}
