@@ -87,6 +87,7 @@ a:hover {
     align-items: center;
     gap: 8px;
     flex-shrink: 0;
+    text-decoration: none;
 }
 
 .img-logo {
@@ -931,6 +932,14 @@ body.response-page {
     .curl-details {
         width: calc(100vw - 32px);
         max-width: 500px;
+    }
+
+    .request-info-container {
+        height: auto;
+        min-height: 40px;
+        word-break: break-all;
+        text-align: center;
+        padding: 8px 12px;
     }
 
     /* Info modal */

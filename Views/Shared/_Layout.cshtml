@@ -16,10 +16,10 @@
 <body>
 
     <header class="site-header">
-        <div class="header-logo">
+        <a class="header-logo" href="/home">
             <img src="/images/f5-logo.svg" class="img-logo" alt="F5">
             <span class="logo-text">DemoApp</span>
-        </div>
+        </a>
         <nav class="site-nav">
             <ul class="menu">
                 <li><a href="/home">Home</a></li>
@@ -79,7 +79,8 @@
             var navToggle = document.getElementById('navToggle');
             var header = document.querySelector('.site-header');
 
-            navToggle.addEventListener('click', function () {
+            navToggle.addEventListener('click', function (e) {
+                e.stopPropagation();
                 var isOpen = header.classList.toggle('nav-open');
                 navToggle.setAttribute('aria-expanded', String(isOpen));
                 navToggle.innerHTML = isOpen ? closeIcon : menuIcon;
