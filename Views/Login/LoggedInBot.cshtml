@@ -1,21 +1,40 @@
-﻿<html>
+@{ Layout = null; }
+<!DOCTYPE html>
+<html>
 <head>
-    <title>DemoApp</title>
-    <link rel="icon" href="/images/f5-logo.svg">
-    <link rel="stylesheet" href="~/css/style.css">
+    <meta charset="utf-8">
+    <title>Bot</title>
+    <script>(function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
     <style>
-        body {
-            background-color: white;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; transition: background 0.15s ease, color 0.15s ease; }
+        .icon { color: #9ca3af; margin-bottom: 14px; }
+        .code { font-size: 26px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 4px; }
+        .desc { font-size: 12px; color: #6b7280; }
+        .result { text-align: center; }
+        [data-theme="dark"] body { background: #1a1a1a; color: #f0f0f0; }
+        [data-theme="dark"] .icon { color: #555; }
+        [data-theme="dark"] .desc { color: #888; }
     </style>
 </head>
 <body>
-
-    <div class="response-container">
-        <h3 class="h3-title">Login</h3>
-        <img src="~/images/bot.png" height="250" width="250">
-        <h3 class="h3-title">Successful</h3>
+    <div class="result">
+        <div class="icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                <rect x="9" y="9" width="6" height="6"/>
+                <line x1="9" y1="1" x2="9" y2="4"/>
+                <line x1="15" y1="1" x2="15" y2="4"/>
+                <line x1="9" y1="20" x2="9" y2="23"/>
+                <line x1="15" y1="20" x2="15" y2="23"/>
+                <line x1="20" y1="9" x2="23" y2="9"/>
+                <line x1="20" y1="14" x2="23" y2="14"/>
+                <line x1="1" y1="9" x2="4" y2="9"/>
+                <line x1="1" y1="14" x2="4" y2="14"/>
+            </svg>
+        </div>
+        <p class="code">Bot Request</p>
+        <p class="desc">Login successful</p>
     </div>
-
 </body>
 </html>

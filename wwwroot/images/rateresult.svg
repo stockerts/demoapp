@@ -1,0 +1,17 @@
+<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- Y-axis -->
+  <line x1="44" y1="20" x2="44" y2="200" stroke="#003366" stroke-width="8" stroke-linecap="round"/>
+  <!-- X-axis -->
+  <line x1="44" y1="200" x2="220" y2="200" stroke="#003366" stroke-width="8" stroke-linecap="round"/>
+  <!-- Bar 1 (small) -->
+  <rect x="60" y="152" width="34" height="48" rx="4" fill="#003366"/>
+  <!-- Bar 2 (medium) -->
+  <rect x="108" y="118" width="34" height="82" rx="4" fill="#003366"/>
+  <!-- Bar 3 (exceeds limit - red) -->
+  <rect x="156" y="60" width="34" height="140" rx="4" fill="#dc2626"/>
+  <!-- Rate limit line -->
+  <line x1="44" y1="118" x2="220" y2="118" stroke="#dc2626" stroke-width="4" stroke-dasharray="10 6"/>
+  <!-- Arrow on bar 3 indicating overflow -->
+  <polygon points="173,44 163,66 183,66" fill="#dc2626"/>
+  <line x1="173" y1="44" x2="173" y2="62" stroke="#dc2626" stroke-width="6" stroke-linecap="round"/>
+</svg>

@@ -1,33 +1,7 @@
-﻿﻿<html>
-<head>
-    <title>DemoApp</title>
-    <link rel="icon" href="/images/f5-logo.svg">
-    <link rel="stylesheet" href="~/css/style.css">
-</head>
-<body>
-
-    <div class="banner-container">
-        <img src="/images/f5-logo.svg" class="img-logo">
-        <img src="/images/demo-app-title.png" class="img-logo-text">
-    </div>
-
-    <div class="menu-container">
-        <ul class="menu">
-            <li><a href="/home">Home</a></li>
-            <li><a href="/response">Response</a></li>
-            <li><a href="/waf">WAF</a></li>
-            <li><a href="/bot">Bot</a></li>
-            <li><a href="/rate">Rate</a></li>
-            <li><a href="/client">Client</a></li>
-            <li><a href="/login">Login</a></li>
-        </ul>
-    </div>
-
     <div class="button-container">
         <button class="button" onclick="loadPage('/WAF/SQL?age=5%27%20OR%20%271%27=%271')">SQL</button>
         <button class="button" onclick="loadPage('/WAF/DIR?file=../../hidden_agenda.txt')">DIR</button>
         <button class="button" onclick="loadPage('/WAF/XSS?update=%3Cscript%3Ealert%28%27XSS%27%29%3B%3C%2Fscript%3E')">XSS</button>
-        <!--<button class="button" onclick="loginPost()">Bot</button>-->
     </div>
 
     <div class="request-info-container"></div>
@@ -36,73 +10,94 @@
         <iframe class="frame" id="pageFrame"></iframe>
     </div>
 
-    <div style="text-align: center; margin-top: 20px;">
+    <details class="curl-details" id="curlDetails">
+        <summary>Details</summary>
+        <pre class="curl-output" id="curlOutput"></pre>
+    </details>
+
+    <div class="info-button-container">
         <button id="infoButton" class="info-button">Info</button>
     </div>
 
     <div id="infoFrame" class="info-frame">
         <div class="info-content">
             <p>Click one of the buttons to simulate an attack. These patterns of attacks can be identified and mitigated by a WAF.</p>
-            <p><strong>SQL Injection:</strong> An attacker manipulates a web application's database query by injecting malicious SQL code into input fields, allowing them to retrieve, modify, or delete data from the database.</p>
-            <p><strong>Path Traversal:</strong> This attack occurs when an attacker exploits a vulnerability in an application to access restricted files or directories on the server by manipulating file paths.</p>
-            <p><strong>Cross-Site Scripting:</strong> Attacker injects malicious scripts into web pages viewed by other users, typically executed in the victim's browser to steal cookies, session tokens, or perform other malicious actions.</p>
+
+            <div class="info-item">
+                <div class="info-item-label">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+                    SQL Injection
+                </div>
+                <p>An attacker manipulates a web application's database query by injecting malicious SQL code into input fields, allowing them to retrieve, modify, or delete data from the database.</p>
+            </div>
+
+            <div class="info-item">
+                <div class="info-item-label">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    Path Traversal
+                </div>
+                <p>This attack occurs when an attacker exploits a vulnerability in an application to access restricted files or directories on the server by manipulating file paths.</p>
+            </div>
+
+            <div class="info-item">
+                <div class="info-item-label">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    Cross-Site Scripting
+                </div>
+                <p>Attacker injects malicious scripts into web pages viewed by other users, typically executed in the victim's browser to steal cookies, session tokens, or perform other malicious actions.</p>
+            </div>
         </div>
     </div>
 
     <div id="overlay" class="overlay"></div>
 
-    <div class="script-container">
-        <script>
-            function loadPage(url) {
-                // Set the src attribute of the iframe
-                document.getElementById('pageFrame').src = url;
+@section Scripts {
+    <script>
+        function addLine(container, text, type) {
+            var span = document.createElement('span');
+            span.className = 'curl-' + type;
+            span.textContent = text + '\n';
+            container.appendChild(span);
+        }
 
-                // Decode the URL to remove encoding
-                var decodedUrl = decodeURIComponent(url);
+        async function loadPage(url) {
+            document.getElementById('pageFrame').src = url;
+            document.querySelector('.request-info-container').textContent = 'Request URI: ' + decodeURIComponent(url);
 
-                // Get the container element
-                var requestContainer = document.querySelector('.request-info-container');
+            var output = document.getElementById('curlOutput');
+            output.innerHTML = '';
 
-                // Clear any existing content in the container
-                requestContainer.innerHTML = '';
+            try {
+                var fullUrl = new URL(url, window.location.origin);
 
-                // Create a text node containing the request information
-                var requestText = document.createTextNode("Request URI: " + decodedUrl); // You can add more details if needed
+                addLine(output, '> GET ' + fullUrl.pathname + fullUrl.search + ' HTTP/1.1', 'req');
+                addLine(output, '> Host: ' + fullUrl.host, 'req');
+                addLine(output, '> Accept: text/html,*/*', 'req');
+                addLine(output, '>', 'req');
 
-                // Append the text node to the container
-                requestContainer.appendChild(requestText);
+                var response = await fetch(url);
+
+                addLine(output, '< HTTP/1.1 ' + response.status + ' ' + response.statusText, 'res');
+                response.headers.forEach(function (value, name) {
+                    addLine(output, '< ' + name + ': ' + value, 'res');
+                });
+                addLine(output, '<', 'res');
+
+                var body = await response.text();
+                var lines = body.split('\n');
+                var limit = 40;
+                lines.slice(0, limit).forEach(function (line) {
+                    addLine(output, line, 'body');
+                });
+                if (lines.length > limit) {
+                    addLine(output, '... (' + (lines.length - limit) + ' lines truncated)', 'meta');
+                }
+
+            } catch (e) {
+                addLine(output, '* Error: ' + e.message, 'meta');
             }
+        }
 
-            function loginPost() {
-                var xhr = new XMLHttpRequest();
-                var url = '/login';
-                xhr.open('POST', url, true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Adding Content-Type header
-                xhr.setRequestHeader('User-Agent', 'DemoAppBot/1.0'); // Adding a custom User-Agent header
-                
-                // The POST body content
-                var body = 'username=admin&password=admin';
-                
-                // Update the request-info-container with the request details
-                var requestContainer = document.querySelector('.request-info-container');
-                requestContainer.innerHTML = ''; // Clear any existing content
-                var requestText = document.createTextNode("Request URI: POST " + url);
-                requestContainer.appendChild(requestText);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4) {
-                        // Display the response in the iframe
-                        var iframe = document.getElementById('pageFrame');
-                        iframe.contentDocument.open();
-                        iframe.contentDocument.write(xhr.responseText);
-                        iframe.contentDocument.close();
-                    }
-                };
-                
-                // Send the POST request
-                xhr.send(body);
-            }
-        // Info Button
         document.getElementById('infoButton').addEventListener('click', () => {
             document.getElementById('infoFrame').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
@@ -113,16 +108,7 @@
             document.getElementById('overlay').style.display = 'none';
         };
 
-        // Close modal by clicking anywhere
         document.getElementById('overlay').addEventListener('click', closeModal);
         document.getElementById('infoFrame').addEventListener('click', closeModal);
-
-        </script>
-    </div>
-
-    <div class="disclaimer">
-        Site is for demonstration only. Not an official F5 property.
-    </div>
-
-</body>
-</html>
+    </script>
+}
