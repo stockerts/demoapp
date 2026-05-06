@@ -1,0 +1,187 @@
+    <div class="challenge-page">
+
+        <div class="challenge-run-all-container">
+            <button class="button" id="runAllButton">Run All</button>
+        </div>
+
+        <div class="challenge-grid">
+
+            <!-- 1. Header -->
+            <div class="challenge-card" id="card-header">
+                <div class="challenge-card-header">
+                    <div class="challenge-title">
+                        <span class="challenge-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                        </span>
+                        Header
+                    </div>
+                    <span class="challenge-status" id="status-header" data-state="idle">—</span>
+                </div>
+                <p class="challenge-desc">Checks that the proxy injects a custom request header (<code>challenge: test</code>) into inbound traffic.</p>
+                <div class="challenge-card-footer">
+                    <span class="challenge-detail" id="detail-header"></span>
+                    <button class="challenge-run-btn" data-challenge="header">Run</button>
+                </div>
+            </div>
+
+            <!-- 2. Redirect -->
+            <div class="challenge-card" id="card-redirect">
+                <div class="challenge-card-header">
+                    <div class="challenge-title">
+                        <span class="challenge-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                        </span>
+                        Redirect
+                    </div>
+                    <span class="challenge-status" id="status-redirect" data-state="idle">—</span>
+                </div>
+                <p class="challenge-desc">Requests <code>/old/login</code> — expects the proxy to issue a 301/302 redirect to a valid page. A 404 means the redirect is not configured.</p>
+                <div class="challenge-card-footer">
+                    <span class="challenge-detail" id="detail-redirect"></span>
+                    <button class="challenge-run-btn" data-challenge="redirect">Run</button>
+                </div>
+            </div>
+
+            <!-- 3. Rate Limit -->
+            <div class="challenge-card" id="card-ratelimit">
+                <div class="challenge-card-header">
+                    <div class="challenge-title">
+                        <span class="challenge-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </span>
+                        Rate Limit
+                    </div>
+                    <span class="challenge-status" id="status-ratelimit" data-state="idle">—</span>
+                </div>
+                <p class="challenge-desc">Fires 10 requests in rapid succession. If the proxy enforces a rate limit and blocks at least one request, the challenge passes.</p>
+                <div class="challenge-card-footer">
+                    <span class="challenge-detail" id="detail-ratelimit"></span>
+                    <button class="challenge-run-btn" data-challenge="ratelimit">Run</button>
+                </div>
+            </div>
+
+            <!-- 4. WAF -->
+            <div class="challenge-card" id="card-waf">
+                <div class="challenge-card-header">
+                    <div class="challenge-title">
+                        <span class="challenge-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </span>
+                        WAF
+                    </div>
+                    <span class="challenge-status" id="status-waf" data-state="idle">—</span>
+                </div>
+                <p class="challenge-desc">Sends a SQL injection payload in the query string. A WAF should detect and block the malicious request.</p>
+                <div class="challenge-card-footer">
+                    <span class="challenge-detail" id="detail-waf"></span>
+                    <button class="challenge-run-btn" data-challenge="waf">Run</button>
+                </div>
+            </div>
+
+            <!-- 5. Bot Declared -->
+            <div class="challenge-card" id="card-botdeclared">
+                <div class="challenge-card-header">
+                    <div class="challenge-title">
+                        <span class="challenge-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                        </span>
+                        Bot — Declared
+                    </div>
+                    <span class="challenge-status" id="status-botdeclared" data-state="idle">—</span>
+                </div>
+                <p class="challenge-desc">Sends a request using a known bot user-agent. Signature-based bot defense should detect and block this client.</p>
+                <div class="challenge-card-footer">
+                    <span class="challenge-detail" id="detail-botdeclared"></span>
+                    <button class="challenge-run-btn" data-challenge="botdeclared">Run</button>
+                </div>
+            </div>
+
+            <!-- 6. Bot Masked -->
+            <div class="challenge-card" id="card-botmasked">
+                <div class="challenge-card-header">
+                    <div class="challenge-title">
+                        <span class="challenge-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                        </span>
+                        Bot — Masked
+                    </div>
+                    <span class="challenge-status" id="status-botmasked" data-state="idle">—</span>
+                </div>
+                <p class="challenge-desc">Replays your browser's user-agent to masquerade as a legitimate user. Signal-based bot defense is required to detect this automation.</p>
+                <div class="challenge-card-footer">
+                    <span class="challenge-detail" id="detail-botmasked"></span>
+                    <button class="challenge-run-btn" data-challenge="botmasked">Run</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+@section Scripts {
+    <script>
+        const challenges = ['header', 'redirect', 'ratelimit', 'waf', 'botdeclared', 'botmasked'];
+
+        const actionMap = {
+            header:      '/Challenge/RunHeader',
+            redirect:    '/Challenge/RunRedirect',
+            ratelimit:   '/Challenge/RunRateLimit',
+            waf:         '/Challenge/RunWAF',
+            botdeclared: '/Challenge/RunBotDeclared',
+            botmasked:   '/Challenge/RunBotMasked',
+        };
+
+        function setStatus(name, state) {
+            const el = document.getElementById('status-' + name);
+            el.setAttribute('data-state', state);
+            if (state === 'idle')    { el.textContent = '—'; }
+            if (state === 'running') { el.textContent = ''; el.innerHTML = '<span class="challenge-spinner"></span>'; }
+            if (state === 'pass')    { el.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'; }
+            if (state === 'fail')    { el.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'; }
+        }
+
+        function setDetail(name, text) {
+            document.getElementById('detail-' + name).textContent = text;
+        }
+
+        async function runChallenge(name) {
+            setStatus(name, 'running');
+            setDetail(name, '');
+
+            const params = {
+                protocol: window.location.protocol.replace(':', ''),
+                domain:   window.location.hostname,
+                port:     window.location.port || (window.location.protocol === 'https:' ? '443' : '80'),
+            };
+            if (name === 'botmasked') params.userAgent = navigator.userAgent;
+            const body = new URLSearchParams(params);
+
+            try {
+                const res = await fetch(actionMap[name], {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body,
+                });
+                const data = await res.json();
+                setStatus(name, data.pass ? 'pass' : 'fail');
+                setDetail(name, data.detail || '');
+                return data.pass;
+            } catch (err) {
+                setStatus(name, 'fail');
+                setDetail(name, err.message);
+                return false;
+            }
+        }
+
+        // Individual run buttons
+        document.querySelectorAll('.challenge-run-btn').forEach(btn => {
+            btn.addEventListener('click', () => runChallenge(btn.dataset.challenge));
+        });
+
+        // Run All — sequential, continues regardless of failures
+        document.getElementById('runAllButton').addEventListener('click', async () => {
+            for (const name of challenges) {
+                await runChallenge(name);
+            }
+        });
+    </script>
+}
