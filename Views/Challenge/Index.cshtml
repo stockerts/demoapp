@@ -177,10 +177,14 @@
             btn.addEventListener('click', () => runChallenge(btn.dataset.challenge));
         });
 
-        // Run All — sequential, continues regardless of failures
+        // Run All — sequential with 2s pause between challenges
         document.getElementById('runAllButton').addEventListener('click', async () => {
-            for (const name of challenges) {
-                await runChallenge(name);
+            for (let i = 0; i < challenges.length; i++) {
+                await runChallenge(challenges[i]);
+                if (i < challenges.length - 1) {
+                    const delay = challenges[i] === 'ratelimit' ? 2000 : 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
             }
         });
     </script>

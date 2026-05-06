@@ -109,7 +109,6 @@ public class ChallengeController : Controller
             var body = await response.Content.ReadAsStringAsync();
 
             bool pass = response.StatusCode == System.Net.HttpStatusCode.Forbidden ||
-                        response.StatusCode == System.Net.HttpStatusCode.TooManyRequests ||
                         body.Contains("blocked", StringComparison.OrdinalIgnoreCase) ||
                         body.Contains("rejected", StringComparison.OrdinalIgnoreCase);
 
@@ -129,13 +128,16 @@ public class ChallengeController : Controller
         {
             string url = $"{protocol}://{domain}:{port}/login";
             var client = _httpClientFactory.CreateClient();
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
+            {
+                Content = new StringContent("username=admin&password=admin", System.Text.Encoding.UTF8, "application/x-www-form-urlencoded")
+            };
             request.Headers.UserAgent.ParseAdd("Mozilla/5.0 (compatible; Ask Jeeves/Teoma;)");
+            request.Headers.Add("DemoApp", "Bot");
             var response = await client.SendAsync(request);
             var body = await response.Content.ReadAsStringAsync();
 
             bool pass = response.StatusCode == System.Net.HttpStatusCode.Forbidden ||
-                        response.StatusCode == System.Net.HttpStatusCode.TooManyRequests ||
                         body.Contains("blocked", StringComparison.OrdinalIgnoreCase) ||
                         body.Contains("rejected", StringComparison.OrdinalIgnoreCase);
 
@@ -155,14 +157,17 @@ public class ChallengeController : Controller
         {
             string url = $"{protocol}://{domain}:{port}/login";
             var client = _httpClientFactory.CreateClient();
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
+            {
+                Content = new StringContent("username=admin&password=admin", System.Text.Encoding.UTF8, "application/x-www-form-urlencoded")
+            };
             if (!string.IsNullOrWhiteSpace(userAgent))
                 request.Headers.UserAgent.ParseAdd(userAgent);
+            request.Headers.Add("DemoApp", "Bot");
             var response = await client.SendAsync(request);
             var body = await response.Content.ReadAsStringAsync();
 
             bool pass = response.StatusCode == System.Net.HttpStatusCode.Forbidden ||
-                        response.StatusCode == System.Net.HttpStatusCode.TooManyRequests ||
                         body.Contains("blocked", StringComparison.OrdinalIgnoreCase) ||
                         body.Contains("rejected", StringComparison.OrdinalIgnoreCase);
 
