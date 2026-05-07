@@ -1,0 +1,70 @@
+    <div class="button-container">
+        <button class="button" id="sendButton">Send Request</button>
+    </div>
+
+    <div class="request-info-container" id="requestInfoContainer"></div>
+
+    <div class="frame-container">
+        <iframe class="frame" id="resultFrame"></iframe>
+    </div>
+
+    <div class="info-button-container">
+        <button id="infoButton" class="info-button">Info</button>
+    </div>
+
+    <div id="infoFrame" class="info-frame">
+        <div class="info-content">
+            <p>Click the button to simulate a request using a known bad user-agent. The request is a server-side GET to this page with the user-agent set to <strong>badactor</strong>.</p>
+
+            <div class="info-item">
+                <div class="info-item-label">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    Bad Actor
+                </div>
+                <p>A request made using the user-agent string <strong>badactor</strong>. Policies that block by user-agent signature will identify and reject this client.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('requestInfoContainer').textContent = '';
+        });
+
+        document.getElementById('sendButton').addEventListener('click', async () => {
+            document.getElementById('requestInfoContainer').textContent = 'badactor';
+
+            try {
+                const response = await fetch('/UserAgent/SendRequest', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        protocol: window.location.protocol.replace(':', ''),
+                        domain: window.location.hostname,
+                        port: window.location.port || (window.location.protocol === 'https:' ? '443' : '80'),
+                    }),
+                });
+                const text = await response.text();
+                document.getElementById('resultFrame').srcdoc = text;
+            } catch (error) {
+                document.getElementById('resultFrame').srcdoc = `<p style="color:red;">Error: ${error.message}</p>`;
+            }
+        });
+
+        document.getElementById('infoButton').addEventListener('click', () => {
+            document.getElementById('infoFrame').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        });
+
+        const closeModal = () => {
+            document.getElementById('infoFrame').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        };
+
+        document.getElementById('overlay').addEventListener('click', closeModal);
+        document.getElementById('infoFrame').addEventListener('click', closeModal);
+    </script>
+}

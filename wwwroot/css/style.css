@@ -901,22 +901,22 @@ body.response-page {
     align-items: center;
 }
 
-.challenge-field {
+.challenge-section-label {
     display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.challenge-field.grow {
-    flex: 1;
-}
-
-.challenge-label {
+    align-items: center;
+    gap: 8px;
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-dim);
+}
+
+.challenge-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
 }
 
 .challenge-scenario {
@@ -934,11 +934,15 @@ body.response-page {
 }
 
 .challenge-card.locked {
-    opacity: 0.4;
+    background: var(--surface-alt);
 }
 
-.challenge-card.locked .challenge-run-btn {
-    cursor: not-allowed;
+.challenge-card.locked > :not(.challenge-card-header) {
+    display: none;
+}
+
+.challenge-card.passed {
+    background: var(--surface-alt);
 }
 
 .challenge-desc code {
