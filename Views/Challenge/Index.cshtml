@@ -17,7 +17,11 @@
                     </div>
                     <span class="challenge-status" id="status-header" data-state="idle">—</span>
                 </div>
-                <p class="challenge-desc">Checks that the proxy injects a custom request header (<code>challenge: test</code>) into inbound traffic.</p>
+                <p class="challenge-scenario">Requests passing through the proxy are missing a required header.</p>
+                <div class="challenge-field grow">
+                    <span class="challenge-label">Success</span>
+                    <p class="challenge-desc">A header with <code>challenge: test</code> is present.</p>
+                </div>
                 <div class="challenge-card-footer">
                     <span class="challenge-detail" id="detail-header"></span>
                     <button class="challenge-run-btn" data-challenge="header">Run</button>
@@ -25,7 +29,7 @@
             </div>
 
             <!-- 2. Redirect -->
-            <div class="challenge-card" id="card-redirect">
+            <div class="challenge-card locked" id="card-redirect">
                 <div class="challenge-card-header">
                     <div class="challenge-title">
                         <span class="challenge-icon">
@@ -33,35 +37,43 @@
                         </span>
                         Redirect
                     </div>
-                    <span class="challenge-status" id="status-redirect" data-state="idle">—</span>
+                    <span class="challenge-status" id="status-redirect" data-state="locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
                 </div>
-                <p class="challenge-desc">Requests <code>/old/login</code> — expects the proxy to issue a 301/302 redirect to a valid page. A 404 means the redirect is not configured.</p>
+                <p class="challenge-scenario">Users accessing an old login path are receiving a 404.</p>
+                <div class="challenge-field grow">
+                    <span class="challenge-label">Success</span>
+                    <p class="challenge-desc">Requests to <code>/old/login</code> are redirected to <code>/login</code>.</p>
+                </div>
                 <div class="challenge-card-footer">
                     <span class="challenge-detail" id="detail-redirect"></span>
-                    <button class="challenge-run-btn" data-challenge="redirect">Run</button>
+                    <button class="challenge-run-btn" data-challenge="redirect" disabled>Run</button>
                 </div>
             </div>
 
             <!-- 3. Rate Limit -->
-            <div class="challenge-card" id="card-ratelimit">
+            <div class="challenge-card locked" id="card-ratelimit">
                 <div class="challenge-card-header">
                     <div class="challenge-title">
                         <span class="challenge-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="4"/><line x1="12" y1="20" x2="12" y2="10"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
                         </span>
                         Rate Limit
                     </div>
-                    <span class="challenge-status" id="status-ratelimit" data-state="idle">—</span>
+                    <span class="challenge-status" id="status-ratelimit" data-state="locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
                 </div>
-                <p class="challenge-desc">Fires 10 requests in rapid succession. If the proxy enforces a rate limit and blocks at least one request, the challenge passes.</p>
+                <p class="challenge-scenario">Bursts of traffic are overwhelming the application.</p>
+                <div class="challenge-field grow">
+                    <span class="challenge-label">Success</span>
+                    <p class="challenge-desc">Requests are limited to less than 10 per second.</p>
+                </div>
                 <div class="challenge-card-footer">
                     <span class="challenge-detail" id="detail-ratelimit"></span>
-                    <button class="challenge-run-btn" data-challenge="ratelimit">Run</button>
+                    <button class="challenge-run-btn" data-challenge="ratelimit" disabled>Run</button>
                 </div>
             </div>
 
             <!-- 4. WAF -->
-            <div class="challenge-card" id="card-waf">
+            <div class="challenge-card locked" id="card-waf">
                 <div class="challenge-card-header">
                     <div class="challenge-title">
                         <span class="challenge-icon">
@@ -69,17 +81,21 @@
                         </span>
                         WAF
                     </div>
-                    <span class="challenge-status" id="status-waf" data-state="idle">—</span>
+                    <span class="challenge-status" id="status-waf" data-state="locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
                 </div>
-                <p class="challenge-desc">Sends a SQL injection payload in the query string. A WAF should detect and block the malicious request.</p>
+                <p class="challenge-scenario">Bad actors are sending malicious requests against the application.</p>
+                <div class="challenge-field grow">
+                    <span class="challenge-label">Success</span>
+                    <p class="challenge-desc">Malicious requests are blocked.</p>
+                </div>
                 <div class="challenge-card-footer">
                     <span class="challenge-detail" id="detail-waf"></span>
-                    <button class="challenge-run-btn" data-challenge="waf">Run</button>
+                    <button class="challenge-run-btn" data-challenge="waf" disabled>Run</button>
                 </div>
             </div>
 
             <!-- 5. Bot Declared -->
-            <div class="challenge-card" id="card-botdeclared">
+            <div class="challenge-card locked" id="card-botdeclared">
                 <div class="challenge-card-header">
                     <div class="challenge-title">
                         <span class="challenge-icon">
@@ -87,17 +103,21 @@
                         </span>
                         Bot — Declared
                     </div>
-                    <span class="challenge-status" id="status-botdeclared" data-state="idle">—</span>
+                    <span class="challenge-status" id="status-botdeclared" data-state="locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
                 </div>
-                <p class="challenge-desc">Sends a request using a known bot user-agent. Signature-based bot defense should detect and block this client.</p>
+                <p class="challenge-scenario">Automated tools using known bot signatures are submitting login requests.</p>
+                <div class="challenge-field grow">
+                    <span class="challenge-label">Success</span>
+                    <p class="challenge-desc">Automated tools are blocked.</p>
+                </div>
                 <div class="challenge-card-footer">
                     <span class="challenge-detail" id="detail-botdeclared"></span>
-                    <button class="challenge-run-btn" data-challenge="botdeclared">Run</button>
+                    <button class="challenge-run-btn" data-challenge="botdeclared" disabled>Run</button>
                 </div>
             </div>
 
             <!-- 6. Bot Masked -->
-            <div class="challenge-card" id="card-botmasked">
+            <div class="challenge-card locked" id="card-botmasked">
                 <div class="challenge-card-header">
                     <div class="challenge-title">
                         <span class="challenge-icon">
@@ -105,12 +125,16 @@
                         </span>
                         Bot — Masked
                     </div>
-                    <span class="challenge-status" id="status-botmasked" data-state="idle">—</span>
+                    <span class="challenge-status" id="status-botmasked" data-state="locked"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
                 </div>
-                <p class="challenge-desc">Replays your browser's user-agent to masquerade as a legitimate user. Signal-based bot defense is required to detect this automation.</p>
+                <p class="challenge-scenario">Sophisticated bots are impersonating real browsers to evade signature-based detection.</p>
+                <div class="challenge-field grow">
+                    <span class="challenge-label">Success</span>
+                    <p class="challenge-desc">Sophisticated bots are blocked.</p>
+                </div>
                 <div class="challenge-card-footer">
                     <span class="challenge-detail" id="detail-botmasked"></span>
-                    <button class="challenge-run-btn" data-challenge="botmasked">Run</button>
+                    <button class="challenge-run-btn" data-challenge="botmasked" disabled>Run</button>
                 </div>
             </div>
 
@@ -130,17 +154,37 @@
             botmasked:   '/Challenge/RunBotMasked',
         };
 
+        const lockIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+
         function setStatus(name, state) {
             const el = document.getElementById('status-' + name);
             el.setAttribute('data-state', state);
             if (state === 'idle')    { el.textContent = '—'; }
-            if (state === 'running') { el.textContent = ''; el.innerHTML = '<span class="challenge-spinner"></span>'; }
+            if (state === 'locked')  { el.innerHTML = lockIcon; }
+            if (state === 'running') { el.innerHTML = '<span class="challenge-spinner"></span>'; }
             if (state === 'pass')    { el.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'; }
             if (state === 'fail')    { el.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'; }
         }
 
         function setDetail(name, text) {
             document.getElementById('detail-' + name).textContent = text;
+        }
+
+        function unlock(name) {
+            const card = document.getElementById('card-' + name);
+            const btn = card.querySelector('.challenge-run-btn');
+            card.classList.remove('locked');
+            btn.disabled = false;
+            if (document.getElementById('status-' + name).dataset.state === 'locked') {
+                setStatus(name, 'idle');
+            }
+        }
+
+        function unlockNext(name) {
+            const idx = challenges.indexOf(name);
+            if (idx >= 0 && idx < challenges.length - 1) {
+                unlock(challenges[idx + 1]);
+            }
         }
 
         async function runChallenge(name) {
@@ -164,6 +208,7 @@
                 const data = await res.json();
                 setStatus(name, data.pass ? 'pass' : 'fail');
                 setDetail(name, data.detail || '');
+                if (data.pass) unlockNext(name);
                 return data.pass;
             } catch (err) {
                 setStatus(name, 'fail');
@@ -177,10 +222,12 @@
             btn.addEventListener('click', () => runChallenge(btn.dataset.challenge));
         });
 
-        // Run All — sequential with 2s pause between challenges
+        // Run All — stops on first fail, does not unlock subsequent challenges
         document.getElementById('runAllButton').addEventListener('click', async () => {
             for (let i = 0; i < challenges.length; i++) {
-                await runChallenge(challenges[i]);
+                unlock(challenges[i]);
+                const passed = await runChallenge(challenges[i]);
+                if (!passed) break;
                 if (i < challenges.length - 1) {
                     const delay = challenges[i] === 'ratelimit' ? 2000 : 1000;
                     await new Promise(resolve => setTimeout(resolve, delay));
