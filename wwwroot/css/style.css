@@ -849,6 +849,186 @@ body.response-page {
     background-color: var(--primary-hover);
 }
 
+/* ── Challenge Page ────────────────────────────────────────────── */
+
+.challenge-page {
+    width: min(640px, 95vw);
+    margin: 0 auto;
+    padding: 8px 0 24px;
+}
+
+.challenge-run-all-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.challenge-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+}
+
+.challenge-card {
+    background: var(--surface);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: background var(--transition);
+}
+
+.challenge-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.challenge-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+}
+
+.challenge-icon {
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+}
+
+.challenge-section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+}
+
+.challenge-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.challenge-scenario {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.challenge-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.challenge-card.locked {
+    background: var(--surface-alt);
+}
+
+.challenge-card.locked > :not(.challenge-card-header) {
+    display: none;
+}
+
+.challenge-card.passed {
+    background: var(--surface-alt);
+}
+
+.challenge-desc code {
+    font-family: ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+    font-size: 12px;
+    background: var(--surface-alt);
+    padding: 1px 4px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.challenge-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 2px;
+}
+
+.challenge-detail {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+}
+
+.challenge-run-btn {
+    flex-shrink: 0;
+    padding: 5px 14px;
+    background-color: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--transition), color var(--transition);
+}
+
+.challenge-run-btn:hover {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+/* Status indicator */
+
+.challenge-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+.challenge-status[data-state="pass"] {
+    color: #16a34a;
+}
+
+.challenge-status[data-state="fail"] {
+    color: #dc2626;
+}
+
+.challenge-status[data-state="running"] {
+    color: var(--primary);
+}
+
+@keyframes challenge-spin {
+    to { transform: rotate(360deg); }
+}
+
+.challenge-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: challenge-spin 0.7s linear infinite;
+}
+
 /* ── Nav Toggle (hamburger) ────────────────────────────────────── */
 
 .nav-toggle {
